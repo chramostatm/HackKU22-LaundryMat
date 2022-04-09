@@ -7,4 +7,9 @@ public class Customer
     {
 
     }
+
+    public void think()
+    {
+
+    }
 }
