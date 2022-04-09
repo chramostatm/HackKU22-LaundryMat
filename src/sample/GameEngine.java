@@ -13,8 +13,8 @@ import static sample.Constants.*;
 public class GameEngine
 {
     final float initialSize = 10;
-    ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
-    ArrayList<Customer> customers = new ArrayList<>();
+    public ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
+    public ArrayList<Customer> customers = new ArrayList<>();
     private BalanceSheet balanceSheet = new BalanceSheet();
     public GameEngine(){
         //continue here.
