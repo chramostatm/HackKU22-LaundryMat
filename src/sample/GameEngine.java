@@ -47,7 +47,6 @@ public class GameEngine
         tiles.get((int) (initialSize-1)).set((int) (initialSize-1), new DoorTile(initialSize-1, initialSize-1));
     }
 
-
     private class GameTimer extends AnimationTimer {
 
         //Keeps track of time

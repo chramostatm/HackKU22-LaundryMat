@@ -1,5 +1,7 @@
 package sample;
 
+import java.awt.*;
+
 public class Tile
 {
     final float width = 10f;
@@ -34,4 +36,7 @@ public class Tile
         return y;
     }
 
+    public void draw(Graphics2D g2d) {
+
+    }
 }
