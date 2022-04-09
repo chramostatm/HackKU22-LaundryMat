@@ -43,7 +43,7 @@ public class GameEngine
             for (int j=0; j<xSize; j++) {
                 if (j == 0 || j == xSize-1 || i == 0 || i == ySize-1) {
                     tiles.get(i).add(new Wall(j, i));
-                } else if (j %3!=0 && i !=1 && i !=ySize-2 && j !=1 && j !=xSize-2) {
+                } else if (j %3!=1 && i !=1 && i !=ySize-2 && j !=1 && j !=xSize-2) {
                     tiles.get(i).add(new Machine(j, i));
                 } else {
                     tiles.get(i).add(new EmptyTile(j, i));

@@ -43,7 +43,7 @@ public class Graphics
         mainBox.setAlignment(Pos.CENTER);
         mainBox.getChildren().addAll(buttonBox, gamePane);
 
-        Scene gameScene = new Scene(root, 750,750);
+        Scene gameScene = new Scene(root, 900,750);
         root.getChildren().addAll(mainBox);
         showScene(gameScene);
     }
