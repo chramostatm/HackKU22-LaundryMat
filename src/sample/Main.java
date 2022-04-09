@@ -21,6 +21,8 @@ public class Main extends Application {
         }
 
         Scene mainMenu = new Scene(root);
+        mainMenu.getStylesheets().add(getClass().getResource("../stylesheets/mainMenu.css").toExternalForm());
+
         MenuController.initialize(graphics, mainMenu);
     }
 
