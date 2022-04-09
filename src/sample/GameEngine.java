@@ -7,19 +7,16 @@ import javafx.scene.control.Dialog;
 
 import java.util.ArrayList;
 
+import static javafx.application.Platform.exit;
 import static sample.Constants.*;
 
 public class GameEngine
 {
     final float initialSize = 10;
-    ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
-    ArrayList<Customer> customers = new ArrayList<>();
-
-
-    public GameEngine()
-    {
-
-
+    public ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
+    public ArrayList<Customer> customers = new ArrayList<>();
+    private BalanceSheet balanceSheet = new BalanceSheet();
+    public GameEngine(){
         //continue here.
     }
 
@@ -32,14 +29,14 @@ public class GameEngine
         //i = y
         //j = x
         for (int i=0; i<initialSize; i++) {
+            tiles.add(new ArrayList<>());
             for (int j=0; j<initialSize; j++) {
-                tiles.add(new ArrayList<>());
                 if (j == 0 || j == initialSize-1 || i == 0 || i == initialSize-1) {
-                    tiles.get(i).add(new Wall(i, j));
+                    tiles.get(i).add(new Wall(j, i));
                 } else if (j %3!=0 && i !=1 && i !=initialSize-2) {
-                    tiles.get(i).add(new Machine(i, j));
+                    tiles.get(i).add(new Machine(j, i));
                 } else {
-                    tiles.get(i).add(new EmptyTile(i, j));
+                    tiles.get(i).add(new EmptyTile(j, i));
                 }
             }
         }
@@ -105,19 +102,18 @@ public class GameEngine
                 //five minutes, then a fifteen second break.
                 if (frameCounter == 0) {
                     secondCounter = (secondCounter + 1) % 315;
-
                     if (secondCounter >= 300) {
                         dayCounter++;
-
                         //do more things after the day passes.
                     }
-
                     if (dayCounter >= 30) {
-                        //go to endGame.
+                        exit();
+                    }
+                    if (balanceSheet.getCurrentCapital() - balanceSheet.getdebt() == 0) {
+                        exit();
                     }
                 }
             }
         }
     }
-
 }
