@@ -16,6 +16,7 @@ public class GameEngine
     public ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
     public ArrayList<Customer> customers = new ArrayList<>();
     private BalanceSheet balanceSheet = new BalanceSheet();
+    private GameTimer timer;
     public GameEngine(){
         start();
         System.out.println(balanceSheet);
@@ -26,6 +27,9 @@ public class GameEngine
         new GameEngine();
     }
     public void start() {
+        timer = new GameTimer();
+        timer.start();
+
         tiles = new ArrayList<>();
         customers = new ArrayList<>();
 
@@ -77,6 +81,7 @@ public class GameEngine
             //100 milliseconds (.1 seconds)
             //runs every frame.
             if (difference>=rate) {
+                GameController.graphics.draw();
                 frameCounter = (frameCounter + 1) % FRAME_RATE;
 
                 //call customer logic every frame.
@@ -114,9 +119,9 @@ public class GameEngine
                     if (dayCounter >= 30) {
                         exit();
                     }
-                    if (balanceSheet.getCurrentCapital() - balanceSheet.getdebt() == 0) {
-                        exit();
-                    }
+//                    if (balanceSheet.getCurrentCapital() - balanceSheet.getdebt() == 0) {
+//                        exit();
+//                    }
                 }
             }
         }
