@@ -18,25 +18,33 @@ public class GameEngine
 
     public GameEngine()
     {
+
+
+        //continue here.
+    }
+
+    public void start() {
+        tiles = new ArrayList<>();
+        customers = new ArrayList<>();
+
         //Define tiles for laundry mat.
+
+        //i = y
+        //j = x
         for (int i=0; i<initialSize; i++) {
             for (int j=0; j<initialSize; j++) {
-                int x = i;
-                int y = j;
                 tiles.add(new ArrayList<>());
-                if (x==0 || x == initialSize-1 || y == 0 || y == initialSize-1) {
-                    tiles.get(i).add(new Wall(x, y));
-                } else if (x%3!=0 && y!=1 && y!=initialSize-2) {
-                    tiles.get(i).add(new Machine(x, y));
+                if (j == 0 || j == initialSize-1 || i == 0 || i == initialSize-1) {
+                    tiles.get(i).add(new Wall(i, j));
+                } else if (j %3!=0 && i !=1 && i !=initialSize-2) {
+                    tiles.get(i).add(new Machine(i, j));
                 } else {
-                    tiles.get(i).add(new EmptyTile(x, y));
+                    tiles.get(i).add(new EmptyTile(i, j));
                 }
             }
         }
         //defines the doorTile as the last tile in the building.
         tiles.get((int) (initialSize-1)).set((int) (initialSize-1), new DoorTile(initialSize-1, initialSize-1));
-
-        //continue here.
     }
 
 
