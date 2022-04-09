@@ -8,22 +8,25 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.awt.*;
+
 
 public class Graphics
 {
     Stage primaryStage;
     Pane gamePane;
+    GameEngine engine;
     public Graphics(Stage inPrimaryStage)
     {
         primaryStage = inPrimaryStage;
         primaryStage.setTitle("Sud Tycoon");
     }
 
-    public void startGame()
+    public void startGame(GameEngine inEngine)
     {
         Group root = new Group();
         gamePane = new Pane();
-        Pane tileSpace = new Pane();
+        engine = inEngine;
 
         Button upgrade = new Button();
         upgrade.setText("Upgrade");
@@ -37,7 +40,6 @@ public class Graphics
         VBox mainBox = new VBox();
         mainBox.getChildren().addAll(buttonBox, gamePane);
 
-        tileSpace.setPrefSize(500, 500);
         Scene gameScene = new Scene(root, 550,500);
         root.getChildren().addAll(mainBox);
         showScene(gameScene);
@@ -45,7 +47,14 @@ public class Graphics
 
     public void draw()
     {
-
+        gamePane.
+        for (int i=0; i<engine.tiles.size(); i++) {
+            for (int j=0; j<engine.tiles.get(i).size(); j++)
+            {
+                Rectangle r = new Rectangle(j*50, i*50, 50, 50);
+                gamePane.getChildren().add();
+            }
+        }
     }
 
     public void showScene(Scene inScene)
