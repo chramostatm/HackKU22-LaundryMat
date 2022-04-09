@@ -7,22 +7,24 @@ import javafx.scene.control.Dialog;
 
 import java.util.ArrayList;
 
+import static javafx.application.Platform.exit;
 import static sample.Constants.*;
 
 public class GameEngine
 {
     final float initialSize = 10;
-    ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
-    ArrayList<Customer> customers = new ArrayList<>();
-
-
-    public GameEngine()
-    {
-
-
+    public ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
+    public ArrayList<Customer> customers = new ArrayList<>();
+    private BalanceSheet balanceSheet = new BalanceSheet();
+    public GameEngine(){
+        start();
+        displayShop();
         //continue here.
     }
 
+    public static void main(String[] args) {
+        new GameEngine();
+    }
     public void start() {
         tiles = new ArrayList<>();
         customers = new ArrayList<>();
@@ -32,19 +34,42 @@ public class GameEngine
         //i = y
         //j = x
         for (int i=0; i<initialSize; i++) {
+            tiles.add(new ArrayList<>());
             for (int j=0; j<initialSize; j++) {
-                tiles.add(new ArrayList<>());
                 if (j == 0 || j == initialSize-1 || i == 0 || i == initialSize-1) {
-                    tiles.get(i).add(new Wall(i, j));
+                    tiles.get(i).add(new Wall(j, i));
                 } else if (j %3!=0 && i !=1 && i !=initialSize-2) {
-                    tiles.get(i).add(new Machine(i, j));
+                    tiles.get(i).add(new Machine(j, i));
                 } else {
-                    tiles.get(i).add(new EmptyTile(i, j));
+                    tiles.get(i).add(new EmptyTile(j, i));
                 }
             }
         }
         //defines the doorTile as the last tile in the building.
         tiles.get((int) (initialSize-2)).set((int) (initialSize-1), new DoorTile(initialSize-1, initialSize-1));
+    }
+    private void displayShop(){
+        tiles.forEach(tileRow -> {
+                    for (Tile tileN : tileRow) {
+                        switch (tileN.getClass().toString()) {
+                            case "class sample.Wall":
+                                System.out.print("*");
+                                break;
+                            case "class sample.EmptyTile":
+                                System.out.print(" ");
+                                break;
+                            case "class sample.Machine":
+                                System.out.print("M");
+                                break;
+                            case "class sample.DoorTile":
+                                System.out.print("D");
+                                break;
+                        }
+                    }
+                    System.out.print("\n");
+                }
+
+        );
     }
 
     private class GameTimer extends AnimationTimer {
@@ -87,8 +112,8 @@ public class GameEngine
                 //lowers a machine's cooldown over time.
                 for (int i = 0; i < initialSize; i++) {
                     for (int j = 0; j < initialSize; j++) {
-                        //skips non-machine tiles or inactive machines.
-                        if (!(tiles.get(i).get(j) instanceof Machine) || !(((Machine) tiles.get(i).get(j)).getActive()))
+                        //skips non-machine tiles or inactive machines or done machines.
+                        if (!(tiles.get(i).get(j) instanceof Machine) || !(((Machine) tiles.get(i).get(j)).getActive()) || ((Machine) tiles.get(i).get(j)).getAvailable())
                             continue;
                         Machine machine = (Machine) tiles.get(i).get(j);
 
@@ -105,19 +130,18 @@ public class GameEngine
                 //five minutes, then a fifteen second break.
                 if (frameCounter == 0) {
                     secondCounter = (secondCounter + 1) % 315;
-
                     if (secondCounter >= 300) {
                         dayCounter++;
-
                         //do more things after the day passes.
                     }
-
                     if (dayCounter >= 30) {
-                        //go to endGame.
+                        exit();
+                    }
+                    if (balanceSheet.getCurrentCapital() - balanceSheet.getdebt() == 0) {
+                        exit();
                     }
                 }
             }
         }
     }
-
 }

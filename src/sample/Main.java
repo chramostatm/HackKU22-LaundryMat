@@ -9,12 +9,19 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
-        primaryStage.setTitle("Sud Tycoon");
+    public void start(Stage primaryStage){
+        Graphics graphics = new Graphics(primaryStage);
+        Parent root = null;
+        try
+        {
+            root = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
+        }catch (Exception e)
+        {
+            System.out.println("Error loading fxml file");
+        }
+
         Scene mainMenu = new Scene(root);
-        primaryStage.setScene(mainMenu);
-        primaryStage.show();
+        MenuController.initialize(graphics, mainMenu);
     }
 
 
