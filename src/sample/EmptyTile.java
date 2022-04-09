@@ -3,9 +3,9 @@ package sample;
 public class EmptyTile extends Tile
 {
 
-    public EmptyTile()
+    public EmptyTile(float inX, float inY)
     {
-
+        super(inX, inY);
     }
 
 }

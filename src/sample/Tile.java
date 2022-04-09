@@ -1,24 +1,37 @@
 package sample;
 
-public class Tile {
+public class Tile
+{
+    final float width = 10f;
+    final float height = 10f;
+    float x;
+    float y;
 
 
-    final float sizeX = 25f;
-    final float sizeY = 25f;
-
-    public Tile()
+    public Tile(float inX, float inY)
     {
-
+        x = inX;
+        y = inY;
     }
 
-    public void setSizeX(float inSize)
+    public float getWidth()
     {
-
+        return width;
     }
 
-    public void setSizeY(float inSize)
+    public float getHeight()
     {
-        
+        return height;
+    }
+
+    public float getX(float inSize)
+    {
+        return x;
+    }
+
+    public float getY(float inSize)
+    {
+        return y;
     }
 
 }
