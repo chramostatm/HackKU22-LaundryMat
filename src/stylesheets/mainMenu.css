@@ -1,0 +1,8 @@
+.label {
+    -fx-font-size: 50px;
+}
+
+.outline.label .text {
+     -fx-stroke: black;
+    -fx-stroke-width: 2px;
+}

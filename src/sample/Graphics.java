@@ -44,6 +44,7 @@ public class Graphics
         mainBox.getChildren().addAll(buttonBox, gamePane);
 
         Scene gameScene = new Scene(root, 900,750);
+
         root.getChildren().addAll(mainBox);
         showScene(gameScene);
     }
