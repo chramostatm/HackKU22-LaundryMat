@@ -73,10 +73,24 @@ public class GameEngine
             if (difference>=rate) {
 
                 //call customer logic every frame.
-
-                //determines if it's time to increase debt via interest.
                 for (int i=0; i<customers.size(); i++) {
                     customers.get(i).think();
+                }
+                //determines if it's time to increase debt via interest.
+                //...
+
+                //lowers a machine's cooldown over time.
+                for (int i=0; i<initialSize; i++) {
+                    for (int j=0; j<initialSize; j++) {
+                        //skips non-machine tiles or inactive machines.
+                        if (!(tiles.get(i).get(j) instanceof Machine) || !(((Machine)tiles.get(i).get(j)).getActive())) continue;
+                        Machine machine = (Machine)tiles.get(i).get(j);
+
+                        //don't use this commented out code for now, but when the customer uses a machine, something like this should be used.
+//                        machine.setTimeUntilComplete(30);
+                        //lower cooldown of machine
+                        machine.washMachine();
+                    }
                 }
             }
         }
