@@ -32,11 +32,11 @@ public class GameEngine
             for (int j=0; j<initialSize; j++) {
                 tiles.add(new ArrayList<>());
                 if (j == 0 || j == initialSize-1 || i == 0 || i == initialSize-1) {
-                    tiles.get(i).add(new Wall(i, j));
+                    tiles.get(i).add(new Wall(j, i));
                 } else if (j %3!=0 && i !=1 && i !=initialSize-2) {
-                    tiles.get(i).add(new Machine(i, j));
+                    tiles.get(i).add(new Machine(j, i));
                 } else {
-                    tiles.get(i).add(new EmptyTile(i, j));
+                    tiles.get(i).add(new EmptyTile(j, i));
                 }
             }
         }
