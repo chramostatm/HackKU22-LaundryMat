@@ -50,7 +50,7 @@ public class GameEngine
             }
         }
         //defines the doorTile as the last tile in the building.
-        tiles.get((int) (1)).set((int) (0), new DoorTile(1, 0));
+        tiles.get((int) (1)).set((int) (0), new DoorTile(0, 1));
     }
     private void displayShop(){
         tiles.forEach(tileRow -> {
