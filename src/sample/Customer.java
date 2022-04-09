@@ -6,7 +6,6 @@ import java.util.Random;        // Needed for the Random name generator.
  */
 public class Customer
 {
-    private static int customerCount = 0;
     private final String name;      // the name of a Customer instance
     private final float weight;     // the weight of the laundry being cleaned
     private double locX;            // the X-coordinate location of the customer
@@ -20,7 +19,6 @@ public class Customer
      */
     public Customer(String custName, float lbs)
     {
-        customerCount++;
         weight = lbs;
         locX = 0.0;           // assuming the laundromat door is in the lower left corner of the map
         locY = 0.0;

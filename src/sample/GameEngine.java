@@ -18,6 +18,7 @@ public class GameEngine
     public ArrayList<Customer> customers = new ArrayList<>();
     private BalanceSheet balanceSheet = new BalanceSheet();
     private GameTimer timer;
+
     public GameEngine(){
         start();
         displayShop();
