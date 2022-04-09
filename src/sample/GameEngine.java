@@ -18,7 +18,7 @@ public class GameEngine
     private BalanceSheet balanceSheet = new BalanceSheet();
     public GameEngine(){
         start();
-        System.out.println(balanceSheet);
+        displayShop();
         //continue here.
     }
 
@@ -47,6 +47,29 @@ public class GameEngine
         }
         //defines the doorTile as the last tile in the building.
         tiles.get((int) (initialSize-2)).set((int) (initialSize-1), new DoorTile(initialSize-1, initialSize-1));
+    }
+    private void displayShop(){
+        tiles.forEach(tileRow -> {
+                    for (Tile tileN : tileRow) {
+                        switch (tileN.getClass().toString()) {
+                            case "class sample.Wall":
+                                System.out.print("*");
+                                break;
+                            case "class sample.EmptyTile":
+                                System.out.print(" ");
+                                break;
+                            case "class sample.Machine":
+                                System.out.print("M");
+                                break;
+                            case "class sample.DoorTile":
+                                System.out.print("D");
+                                break;
+                        }
+                    }
+                    System.out.print("\n");
+                }
+
+        );
     }
 
     private class GameTimer extends AnimationTimer {
