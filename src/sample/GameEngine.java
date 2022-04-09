@@ -17,9 +17,14 @@ public class GameEngine
     public ArrayList<Customer> customers = new ArrayList<>();
     private BalanceSheet balanceSheet = new BalanceSheet();
     public GameEngine(){
+        start();
+        System.out.println(balanceSheet);
         //continue here.
     }
 
+    public static void main(String[] args) {
+        new GameEngine();
+    }
     public void start() {
         tiles = new ArrayList<>();
         customers = new ArrayList<>();
