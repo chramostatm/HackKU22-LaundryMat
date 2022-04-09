@@ -7,6 +7,7 @@ import javafx.scene.control.Dialog;
 
 import java.util.ArrayList;
 
+import static javafx.application.Platform.exit;
 import static sample.Constants.*;
 
 public class GameEngine
@@ -14,12 +15,9 @@ public class GameEngine
     final float initialSize = 10;
     ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
     ArrayList<Customer> customers = new ArrayList<>();
+    private BalanceSheet balanceSheet = new BalanceSheet();
 
-
-    public GameEngine()
     {
-
-
         //continue here.
     }
 
@@ -105,19 +103,18 @@ public class GameEngine
                 //five minutes, then a fifteen second break.
                 if (frameCounter == 0) {
                     secondCounter = (secondCounter + 1) % 315;
-
                     if (secondCounter >= 300) {
                         dayCounter++;
-
                         //do more things after the day passes.
                     }
-
                     if (dayCounter >= 30) {
-                        //go to endGame.
+                        exit();
+                    }
+                    if (balanceSheet.getCurrentCapital() - balanceSheet.getdebt() == 0) {
+                        exit();
                     }
                 }
             }
         }
     }
-
 }

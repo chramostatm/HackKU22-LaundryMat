@@ -1,6 +1,6 @@
 package sample;
-
 import static sample.Constants.FRAME_RATE;
+import java.util.Random;
 
 public class Machine extends Tile
 {
@@ -8,7 +8,7 @@ public class Machine extends Tile
     private boolean active = false;
     private int timeUntilComplete = 0; // in frames
     private boolean done = false; //stores if the machine is ready to be unloaded.
-
+    private int uses = 0;
 
     public Machine(float inX,float inY) {
         super(inX, inY);
@@ -38,6 +38,14 @@ public class Machine extends Tile
         timeUntilComplete--;
         if (timeUntilComplete<=0) {
             done = true;
+            uses++;
+                if(uses > 10) {
+                    Random random = new Random();
+                    int value = random.nextInt(1 - 10);
+                        if (value == 1) {
+                            active = false;
+                    }
+                }
         }
     }
 
