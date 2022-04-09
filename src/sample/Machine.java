@@ -48,5 +48,4 @@ public class Machine extends Tile
                 }
         }
     }
-
 }
