@@ -20,7 +20,7 @@
    <children>
       <Pane prefHeight="286.0" prefWidth="354.0">
          <children>
-            <Button layoutX="139.0" layoutY="142.0" mnemonicParsing="false" onMouseClicked="#test" text="Start Game" />
+            <Button layoutX="139.0" layoutY="142.0" mnemonicParsing="false" onMouseClicked="#startGame" text="Start Game" />
             <Button layoutX="139.0" layoutY="180.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Options" />
             <Label layoutX="109.0" layoutY="48.0" text="Sud Tycoon!" textFill="#4b90f2">
                <font>
