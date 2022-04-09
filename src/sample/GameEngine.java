@@ -29,8 +29,8 @@ public class GameEngine
         //i = y
         //j = x
         for (int i=0; i<initialSize; i++) {
+            tiles.add(new ArrayList<>());
             for (int j=0; j<initialSize; j++) {
-                tiles.add(new ArrayList<>());
                 if (j == 0 || j == initialSize-1 || i == 0 || i == initialSize-1) {
                     tiles.get(i).add(new Wall(j, i));
                 } else if (j %3!=0 && i !=1 && i !=initialSize-2) {
