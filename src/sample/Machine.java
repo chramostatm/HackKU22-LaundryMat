@@ -1,9 +1,10 @@
 package sample;
 
-public class Machine extends Tile {
+public class Machine extends Tile
+{
 
-    public Machine() {
-
+    public Machine(float inX,float inY) {
+        super(inX, inY);
     }
 
 }

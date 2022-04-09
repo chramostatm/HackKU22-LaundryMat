@@ -1,8 +1,15 @@
 package sample;
 
-public class Customer {
+public class Customer
+{
 
-    public Customer() {
+    public Customer()
+    {
+
+    }
+
+    public void think()
+    {
 
     }
 }

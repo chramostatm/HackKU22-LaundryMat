@@ -7,67 +7,79 @@ import javafx.scene.control.Dialog;
 
 import java.util.ArrayList;
 
-public class GameEngine {
+import static sample.Constants.*;
+
+public class GameEngine
+{
+    final float initialSize = 10;
     ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
-    ArrayList<ArrayList<Customer>> customers = new ArrayList<>();
+    ArrayList<Customer> customers = new ArrayList<>();
 
 
-    public GameEngine() {
+    public GameEngine()
+    {
 
+
+        //continue here.
     }
 
-    /*
-    private class MyTimer extends AnimationTimer {
+    public void start() {
+        tiles = new ArrayList<>();
+        customers = new ArrayList<>();
+
+        //Define tiles for laundry mat.
+
+        //i = y
+        //j = x
+        for (int i=0; i<initialSize; i++) {
+            for (int j=0; j<initialSize; j++) {
+                tiles.add(new ArrayList<>());
+                if (j == 0 || j == initialSize-1 || i == 0 || i == initialSize-1) {
+                    tiles.get(i).add(new Wall(i, j));
+                } else if (j %3!=0 && i !=1 && i !=initialSize-2) {
+                    tiles.get(i).add(new Machine(i, j));
+                } else {
+                    tiles.get(i).add(new EmptyTile(i, j));
+                }
+            }
+        }
+        //defines the doorTile as the last tile in the building.
+        tiles.get((int) (initialSize-1)).set((int) (initialSize-1), new DoorTile(initialSize-1, initialSize-1));
+    }
+
+    private class GameTimer extends AnimationTimer {
 
         //Keeps track of time
         long lastUpdate = 0;
+        float rate = 1000_000_000/(float)FRAME_RATE;
 
         //Keeps track of when to stop.
-        int order;
+//        int order;
 
         //constructor method.
-        public MyTimer(int order) {
-            this.order = order;
-            if (mazePane.isRunning()) {
-                mazePane.setStopped(true);
-                mazePane.setRunning(false);
-            }
-
-            if (mazePane.robot.getType() != "PortalRobot") {
-                mazePane.maze.setUsedPortal(false);
-            }
-            mazePane.maze.resetMaze();
-            mazePane.robot.resetRobot();
+        public GameTimer() {
+//            this.order = order;
         }
 
-        /
-          Clock that calls the robot method to solve the maze. Respects the rules about when to do so as well.
-          @param now
-         /
+        /**
+         * Clock that runs the game (customer AI calls, events, etc.).
+         * @param now
+         */
         @Override
         public void handle(long now) {
-            if (now - lastUpdate >= 100_000_000) {
-                if (!mazePane.robot.solved() && !mazePane.isStopped() && order == getOrder()) {
-                    lastUpdate = now;
-                    mazePane.robot.chooseMoveDirection();
-                    mazePane.paint();
-                } else {
-                    stop();
-                    mazePane.setStopped(false);
-                    mazePane.setRunning(false);
-                    Dialog<String> dialog = new Dialog<>();
+            float difference = now - lastUpdate;
 
-                    ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-                    dialog.getDialogPane().getButtonTypes().add(type);
+            //100 milliseconds (.1 seconds)
+            if (difference>=rate) {
 
-                    if (mazePane.robot.solved()) {
-                        dialog.setContentText(mazePane.robot.getEndMsg());
-                        dialog.setOnCloseRequest(dialogEvent -> dialog.close());
-                        dialog.show();
-                    }
+                //call customer logic every frame.
+
+                //determines if it's time to increase debt via interest.
+                for (int i=0; i<customers.size(); i++) {
+                    customers.get(i).think();
                 }
             }
         }
     }
-    */
+
 }
