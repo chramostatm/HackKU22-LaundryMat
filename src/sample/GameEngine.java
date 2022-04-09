@@ -44,7 +44,7 @@ public class GameEngine
             }
         }
         //defines the doorTile as the last tile in the building.
-        tiles.get((int) (initialSize-1)).set((int) (initialSize-1), new DoorTile(initialSize-1, initialSize-1));
+        tiles.get((int) (initialSize-2)).set((int) (initialSize-1), new DoorTile(initialSize-1, initialSize-1));
     }
 
     private class GameTimer extends AnimationTimer {
@@ -52,6 +52,9 @@ public class GameEngine
         //Keeps track of time
         long lastUpdate = 0;
         float rate = 1000_000_000/(float)FRAME_RATE;
+        private int dayCounter = 0;
+        private int secondCounter = 0;
+        private int frameCounter = 0;
 
         //Keeps track of when to stop.
 //        int order;
@@ -70,13 +73,48 @@ public class GameEngine
             float difference = now - lastUpdate;
 
             //100 milliseconds (.1 seconds)
+            //runs every frame.
             if (difference>=rate) {
+                frameCounter = (frameCounter + 1) % FRAME_RATE;
 
                 //call customer logic every frame.
-
-                //determines if it's time to increase debt via interest.
-                for (int i=0; i<customers.size(); i++) {
+                for (int i = 0; i < customers.size(); i++) {
                     customers.get(i).think();
+                }
+                //determines if it's time to increase debt via interest.
+                //...
+
+                //lowers a machine's cooldown over time.
+                for (int i = 0; i < initialSize; i++) {
+                    for (int j = 0; j < initialSize; j++) {
+                        //skips non-machine tiles or inactive machines.
+                        if (!(tiles.get(i).get(j) instanceof Machine) || !(((Machine) tiles.get(i).get(j)).getActive()))
+                            continue;
+                        Machine machine = (Machine) tiles.get(i).get(j);
+
+                        //don't use this commented out code for now, but when the customer uses a machine, something like this should be used.
+//                        machine.setTimeUntilComplete(30);
+                        //lower cooldown of machine
+                        machine.washMachine();
+                    }
+                }
+
+                //if more than 5 minutes pass, then increment the day counter. If you are not in debt by the end of
+                //the 30 day period then you win.
+
+                //five minutes, then a fifteen second break.
+                if (frameCounter == 0) {
+                    secondCounter = (secondCounter + 1) % 315;
+
+                    if (secondCounter >= 300) {
+                        dayCounter++;
+
+                        //do more things after the day passes.
+                    }
+
+                    if (dayCounter >= 30) {
+                        //go to endGame.
+                    }
                 }
             }
         }
