@@ -9,13 +9,30 @@ import java.util.ArrayList;
 
 public class GameEngine
 {
+    final float initialSize = 10;
     ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
     ArrayList<ArrayList<Customer>> customers = new ArrayList<>();
 
 
     public GameEngine()
     {
-
+        for (int i=0; i<initialSize; i++) {
+            for (int j=0; j<initialSize; j++) {
+                int x = i;
+                int y = j;
+                tiles.add(new ArrayList<Tile>());
+                if (x==0 || x == initialSize-1 || y == 0 || y == initialSize-1) {
+                    tiles.get(i).add(new Wall(x, y));
+                } else if (x%3!=0 && y!=1 && y!=initialSize-2) {
+                    tiles.get(i).add(new Machine(x, y));
+                } else {
+                    tiles.get(i).add(new EmptyTile(x, y));
+                }
+//                tiles.get(i).add(new Tile(x, y));
+            }
+        }
+        //defines the doorTile as the last tile in the building.
+        tiles.get((int) (initialSize-1)).set((int) (initialSize-1), new DoorTile(initialSize-1, initialSize-1));
     }
 
     /*
