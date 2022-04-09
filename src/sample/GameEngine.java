@@ -7,12 +7,14 @@ import javafx.scene.control.Dialog;
 
 import java.util.ArrayList;
 
-public class GameEngine {
+public class GameEngine
+{
     ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
     ArrayList<ArrayList<Customer>> customers = new ArrayList<>();
 
 
-    public GameEngine() {
+    public GameEngine()
+    {
 
     }
 
