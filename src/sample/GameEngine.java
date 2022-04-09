@@ -12,7 +12,8 @@ import static sample.Constants.*;
 
 public class GameEngine
 {
-    final float initialSize = 10;
+    final float xSize = 12;
+    final float ySize = 10;
     public ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
     public ArrayList<Customer> customers = new ArrayList<>();
     private BalanceSheet balanceSheet = new BalanceSheet();
@@ -37,12 +38,12 @@ public class GameEngine
 
         //i = y
         //j = x
-        for (int i=0; i<initialSize; i++) {
+        for (int i=0; i<ySize; i++) {
             tiles.add(new ArrayList<>());
-            for (int j=0; j<initialSize; j++) {
-                if (j == 0 || j == initialSize-1 || i == 0 || i == initialSize-1) {
+            for (int j=0; j<xSize; j++) {
+                if (j == 0 || j == xSize-1 || i == 0 || i == ySize-1) {
                     tiles.get(i).add(new Wall(j, i));
-                } else if (j %3!=0 && i !=1 && i !=initialSize-2) {
+                } else if (j %3!=0 && i !=1 && i !=ySize-2 && j !=1 && j !=xSize-2) {
                     tiles.get(i).add(new Machine(j, i));
                 } else {
                     tiles.get(i).add(new EmptyTile(j, i));
@@ -115,8 +116,8 @@ public class GameEngine
                 //...
 
                 //lowers a machine's cooldown over time.
-                for (int i = 0; i < initialSize; i++) {
-                    for (int j = 0; j < initialSize; j++) {
+                for (int i = 0; i < ySize; i++) {
+                    for (int j = 0; j < xSize; j++) {
                         //skips non-machine tiles or inactive machines or done machines.
                         if (!(tiles.get(i).get(j) instanceof Machine) || !(((Machine) tiles.get(i).get(j)).getActive()) || ((Machine) tiles.get(i).get(j)).getAvailable())
                             continue;
