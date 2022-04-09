@@ -87,8 +87,8 @@ public class GameEngine
                 //lowers a machine's cooldown over time.
                 for (int i = 0; i < initialSize; i++) {
                     for (int j = 0; j < initialSize; j++) {
-                        //skips non-machine tiles or inactive machines.
-                        if (!(tiles.get(i).get(j) instanceof Machine) || !(((Machine) tiles.get(i).get(j)).getActive()))
+                        //skips non-machine tiles or inactive machines or done machines.
+                        if (!(tiles.get(i).get(j) instanceof Machine) || !(((Machine) tiles.get(i).get(j)).getActive()) || ((Machine) tiles.get(i).get(j)).getAvailable())
                             continue;
                         Machine machine = (Machine) tiles.get(i).get(j);
 
