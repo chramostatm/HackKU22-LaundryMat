@@ -16,8 +16,7 @@ public class GameEngine
     ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
     ArrayList<Customer> customers = new ArrayList<>();
     private BalanceSheet balanceSheet = new BalanceSheet();
-
-    {
+    public GameEngine(){
         //continue here.
     }
 
