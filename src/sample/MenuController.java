@@ -1,18 +1,19 @@
 package sample;
 
+import javafx.scene.Scene;
+
 public class MenuController
 {
     static Graphics graphics;
 
-    public static void initialize(Graphics inGraphics)
+    public static void initialize(Graphics inGraphics, Scene menuScene)
     {
         graphics = inGraphics;
-        graphics.showFxmlScene("mainMenu.fxml");
+        graphics.showScene(menuScene);
     }
 
     public void startGame()
     {
         GameController.initialize(graphics);
-        graphics.startGame();
     }
 }

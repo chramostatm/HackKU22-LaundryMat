@@ -9,6 +9,7 @@ public class GameController
     {
         graphics = inGraphics;
         gameEngine = new GameEngine();
+        graphics.startGame();
         gameEngine.start();
     }
 
