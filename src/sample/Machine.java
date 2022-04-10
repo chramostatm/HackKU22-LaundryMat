@@ -4,20 +4,20 @@ import static sample.Constants.FRAME_RATE;
 
 public class Machine extends Tile
 {
-    private boolean available = true; //stores if the machine is ready to be occupied with another user.
-    private boolean active = true; //not broken
+    private boolean available = false; //stores if the machine is ready to be occupied with another user.
     private int timeUntilComplete = 0; // in frames
     private boolean done = false; //stores if the machine is ready to be unloaded.
     private boolean upgraded = false;
+    public boolean broken = false;
     private int uses = 0;
     private boolean specialTile = false;
     public Machine(float inX,float inY) {
         super(inX, inY);
     }
 
-    public void setBoughten(boolean inBool)
+    public boolean isBroken()
     {
-        boughten = inBool;
+        return broken;
     }
 
     public boolean getAvailable() {
@@ -34,21 +34,12 @@ public class Machine extends Tile
         return specialTile;
     }
 
-    public boolean getActive() {
-        return this.active;
-    }
-
     public int getTimeUntilComplete() {
         return timeUntilComplete;
     }
 
     public void setAvailable(boolean available) {
         this.available = available;
-    }
-
-    public void setActive(boolean active)
-    {
-        this.active = active;
     }
 
     public void setTimeUntilComplete(int seconds) {
@@ -61,7 +52,7 @@ public class Machine extends Tile
             done = true;
             uses++;
             if(uses > 10) {
-                active = ((int)(Math.random()*10)!=1);
+                broken = ((int)(Math.random()*10)!=1);
             }
         }
     }
