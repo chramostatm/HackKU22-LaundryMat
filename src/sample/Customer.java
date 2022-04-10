@@ -173,10 +173,17 @@ public class Customer
                 Machine t = (Machine)GameController.gameEngine.tiles.get(machineY).get(machineX);
                 int diffX = (int) (locX-t.x), diffY = (int) (locY-t.y);
                 if (Math.abs(diffX)+Math.abs(diffY)<=1) {
-                    if (!waiting) {
+                    if (waiting) {
+                        waiting = (t.getTimeUntilComplete()<=0);
+                        leaving = true;
                         return;
                     } //else
-                    startMachine();
+                    if (!leaving) {
+                        startMachine();
+                        waiting = true;
+                    } else {
+                        stopMachine();
+                    }
                 } else {
                     moveToMachine();
                 }
@@ -250,6 +257,15 @@ public class Customer
         int diffX = (int) (locX-machineX), diffY = (int) (locY-machineY);
         Machine t = (Machine) GameController.gameEngine.tiles.get((int) (locY-diffY)).get((int) (locX-diffX));
         t.setTimeUntilComplete((t.isUpgraded()) ? 20 : 30);
+    }
+
+    public void stopMachine() {
+        int diffX = (int) (locX-machineX), diffY = (int) (locY-machineY);
+        Machine t = (Machine) GameController.gameEngine.tiles.get((int) (locY-diffY)).get((int) (locX-diffX));
+        t.setAvailable(true);
+
+        //increment cash here
+        GameController.gameEngine.balanceSheet.currentCapital+=100;
     }
 
     public boolean atDoor() {

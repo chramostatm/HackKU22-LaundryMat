@@ -22,6 +22,10 @@ public class Machine extends Tile
         return this.active;
     }
 
+    public int getTimeUntilComplete() {
+        return timeUntilComplete;
+    }
+
     public void setAvailable(boolean available) {
         this.available = available;
     }
