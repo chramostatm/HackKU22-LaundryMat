@@ -283,6 +283,7 @@ public class Customer
         int diffX = (int) (locX-machineX), diffY = (int) (locY-machineY);
         Machine t = (Machine) GameController.gameEngine.tiles.get((int) (locY-diffY)).get((int) (locX-diffX));
         t.setTimeUntilComplete((t.isUpgraded()) ? 20 : 30);
+        t.setAvailable(false);
     }
 
     public void stopMachine() {
