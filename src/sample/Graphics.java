@@ -120,7 +120,6 @@ public class Graphics
                 engine.balanceSheet.debt -=50;
             }
         });
-        bigButtonBox.getChildren().addAll(buttonBox, pay50);
 
         Button advertise = new Button();
         advertise.setText("Advertise!");
