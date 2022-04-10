@@ -9,12 +9,18 @@ public class Machine extends Tile
     private int timeUntilComplete = 0; // in frames
     private boolean done = false; //stores if the machine is ready to be unloaded.
     private int uses = 0;
+    private boolean specialTile = false;
     public Machine(float inX,float inY) {
         super(inX, inY);
     }
 
     public boolean getAvailable() {
         return this.available;
+    }
+
+    public void setSpecialTile(boolean inBool)
+    {
+        specialTile = inBool;
     }
 
     public boolean getActive() {
