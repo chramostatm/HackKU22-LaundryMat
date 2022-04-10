@@ -15,7 +15,7 @@ public class Customer
     private int machineY;        // the Y-coordinate of the customer's machine they are using.
     private boolean hasMachine = false;
     private int cooldown = 15;
-    private int satisfaction = 50; // from 0 to 100, changes overall satisfaction about the company.
+    public int satisfaction = 50; // from 0 to 100, changes overall satisfaction about the company.
     private boolean leaving = false;
     private boolean left = false;
     private boolean waiting = false;
@@ -123,7 +123,9 @@ public class Customer
      */
     public void think()
     {
-        if (left) return;
+        if (left) {
+            return;
+        }
 
         cooldown--;
         if (cooldown<=0) {
@@ -150,6 +152,9 @@ public class Customer
                             hasMachine = true;
                             satisfaction+=10+10*Math.random();
                             return;
+                        }
+                        if (!t.isBroken()) {
+                            satisfaction = Math.max(20, satisfaction-5);
                         }
                         offsetY++;
                     }

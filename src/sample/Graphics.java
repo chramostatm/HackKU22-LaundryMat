@@ -252,9 +252,11 @@ public class Graphics
             }
         }
         //draw customer
-        engine.customers.forEach(e -> gamePane.getChildren().add(
-                new Circle(e.getLocX()*75+37.5F, e.getLocY()*75+37.5F, 37.5F)
-        ));
+        engine.customers.forEach(e -> {
+            gamePane.getChildren().add(
+                    new Circle(e.getLocX()*75+37.5F, e.getLocY()*75+37.5F, 37.5F)
+            );
+        });
 
         balanceMenu.setText(String.format("balance: $%.2f", engine.balanceSheet.currentCapital));
         debtMenu.setText(String.format("debt: $%.2f", engine.balanceSheet.debt));

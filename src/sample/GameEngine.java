@@ -14,7 +14,7 @@ public class GameEngine
     public ArrayList<Customer> customers = new ArrayList<>();
     public BalanceSheet balanceSheet = new BalanceSheet();
     private GameTimer timer;
-    private int satisfaction = 50;
+    public int satisfaction = 50;
     public float speedModifier = 1;
 
     public GameEngine(){
@@ -174,8 +174,16 @@ public class GameEngine
                         exit();
                     }
                 }
+//            GameController.gameEngine.satisfaction += (e.satisfaction - GameController.gameEngine.satisfaction)/10F;
+//            System.out.println(GameController.gameEngine.satisfaction);
 
                 //Remove customers who have left.
+                customers.forEach(e-> {
+                    if (e.hasLeft()) {
+                        GameController.gameEngine.satisfaction += (e.satisfaction - GameController.gameEngine.satisfaction)/10F;
+                        System.out.println(GameController.gameEngine.satisfaction);
+                    }
+                });
                 customers.removeIf(Customer::hasLeft);
 
             }
