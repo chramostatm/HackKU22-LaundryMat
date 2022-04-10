@@ -160,9 +160,18 @@ public class Graphics
 
                 if(t instanceof Machine)
                 {
+                    Image machineImage;
+                    if (((Machine)t).isBroken())
+                    {
+                        machineImage = brokenWasher;
+                    } else
+                    {
+                        machineImage = washer;
+                    }
+
                     if(((Machine)t).isSpecialTile())
                     {
-                        currentNode = new ImageView(washer);
+                        currentNode = new ImageView(machineImage);
                         ((ImageView) currentNode).setFitHeight(95);
                         ((ImageView) currentNode).setFitWidth(95);
                         ((ImageView) currentNode).setPreserveRatio(true);
@@ -170,15 +179,13 @@ public class Graphics
                         ((ImageView) currentNode).setY((i-1)*75 +65);
                     }else
                     {
-                        currentNode = new ImageView(washer);
+                        currentNode = new ImageView(machineImage);
                         ((ImageView) currentNode).setFitHeight(75);
                         ((ImageView) currentNode).setFitWidth(75);
                         ((ImageView) currentNode).setPreserveRatio(true);
                         ((ImageView) currentNode).setX(j * 75);
                         ((ImageView) currentNode).setY(i * 75);
                     }
-
-
                 }
                 else if(t instanceof Wall)
                 {
@@ -190,6 +197,7 @@ public class Graphics
                     ((Rectangle) currentNode).setFill(Color.WHITE);
                 }
                 gamePane.getChildren().add(currentNode);
+
             }
         }
         //draw customer
