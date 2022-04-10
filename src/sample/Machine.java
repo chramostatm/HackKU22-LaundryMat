@@ -1,4 +1,5 @@
 package sample;
+
 import static sample.Constants.FRAME_RATE;
 
 public class Machine extends Tile
@@ -40,7 +41,8 @@ public class Machine extends Tile
         this.available = available;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(boolean active)
+    {
         this.active = active;
     }
 
