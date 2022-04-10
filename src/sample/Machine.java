@@ -59,7 +59,7 @@ public class Machine extends Tile
             uses++;
             if(uses > 10) {
                 if (!broken)
-                    broken = ((int)(Math.random()*10)!=1);
+                    broken = ((int)(Math.random()*10)==1);
             }
         }
     }
