@@ -6,6 +6,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import static javafx.application.Platform.exit;
 import static sample.Constants.*;
@@ -71,8 +72,18 @@ public class GameEngine
                     }
                     System.out.print("\n");
                 }
-
         );
+    }
+
+    public void repair() {
+        if(repairCost < balanceSheet.currentCapital)
+        {
+            tiles.stream().forEach(e -> e.
+                    stream().filter(object -> object instanceof Machine).collect(Collectors.toList()).
+                    stream().filter(machine -> ((Machine)machine).isSpecialTile()).collect(Collectors.toList()).
+                    stream().forEach(special -> ((Machine)special).setAvailable(true)));
+            balanceSheet.currentCapital -= repairCost;
+        }
     }
 
     private class GameTimer extends AnimationTimer {
