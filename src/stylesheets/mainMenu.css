@@ -3,7 +3,6 @@
 }
 
 .outline.label .text {
-    -fx-fill: #4444AA;
     -fx-stroke: #000000;
-    -fx-stroke-width: 2px;
+    -fx-stroke-width: 1px;
 }
