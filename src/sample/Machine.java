@@ -56,10 +56,11 @@ public class Machine extends Tile
         if (timeUntilComplete<=0) {
             done = true;
             this.available = true;
+            GameController.gameEngine.balanceSheet.currentCapital += 25;
             uses++;
             if(uses > 10) {
                 if (!broken)
-                    broken = ((int)(Math.random()*10)!=1);
+                    broken = ((int)(Math.random()*10)==1);
             }
         }
     }
