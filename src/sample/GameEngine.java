@@ -16,7 +16,7 @@ public class GameEngine
     final float ySize = 10;
     public ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
     public ArrayList<Customer> customers = new ArrayList<>();
-    private BalanceSheet balanceSheet = new BalanceSheet();
+    public BalanceSheet balanceSheet = new BalanceSheet();
     private GameTimer timer;
 
     public GameEngine(){
@@ -144,10 +144,11 @@ public class GameEngine
                     if (dayCounter >= 30) {
                         exit();
                     }
-//                    if (balanceSheet.getCurrentCapital() - balanceSheet.getdebt() == 0) {
-//                        exit();
-//                    }
                 }
+
+                //Remove customers who have left.
+                customers.removeIf(Customer::hasLeft);
+
             }
         }
     }

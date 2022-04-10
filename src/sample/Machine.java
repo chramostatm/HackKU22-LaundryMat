@@ -8,6 +8,7 @@ public class Machine extends Tile
     private boolean active = false;
     private int timeUntilComplete = 0; // in frames
     private boolean done = false; //stores if the machine is ready to be unloaded.
+    private boolean upgraded = false;
     private int uses = 0;
     private boolean specialTile = false;
     public Machine(float inX,float inY) {
@@ -27,6 +28,10 @@ public class Machine extends Tile
         return this.active;
     }
 
+    public int getTimeUntilComplete() {
+        return timeUntilComplete;
+    }
+
     public void setAvailable(boolean available) {
         this.available = available;
     }
@@ -44,13 +49,13 @@ public class Machine extends Tile
         if (timeUntilComplete<=0) {
             done = true;
             uses++;
-                if(uses > 10) {
-                    Random random = new Random();
-                    int value = random.nextInt(10);
-                        if (value == 1) {
-                            active = false;
-                    }
-                }
+            if(uses > 10) {
+                active = ((int)(Math.random()*10)!=1);
+            }
         }
+    }
+
+    public boolean isUpgraded() {
+        return upgraded;
     }
 }
