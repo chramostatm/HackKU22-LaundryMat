@@ -77,7 +77,6 @@ public class GameEngine
     }
 
     public void repair() {
-        System.out.print(balanceSheet.currentCapital);
         if(repairCost < balanceSheet.currentCapital)
         {
             for(int i =0; i<tiles.size(); i++)
