@@ -81,7 +81,7 @@ public class Customer
 
     /**
      * getLocY method
-     * @return The Y-coordinate locatino of the customer.
+     * @return The Y-coordinate location of the customer.
      */
     public double getLocY()
     {

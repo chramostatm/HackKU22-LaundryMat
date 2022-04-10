@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -94,6 +95,11 @@ public class Graphics
 //                gamePane.getChildren().add(r);
             }
         }
+        //draw customer
+        engine.customers.forEach(e -> gamePane.getChildren().add(
+                new Circle(e.getLocX(), e.getLocY(), 37.5F)
+        ));
+
     }
 
     public void showScene(Scene inScene)
