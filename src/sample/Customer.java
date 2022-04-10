@@ -19,6 +19,7 @@ public class Customer
     private boolean leaving = false;
     private boolean left = false;
     private boolean waiting = false;
+    private boolean checked = false; //stores whether current isle was checked or not.
 
     /**
      * Constructor
@@ -125,6 +126,7 @@ public class Customer
         if (left) return;
         if (leaving) {
             moveToExit();
+            return;
         }
         cooldown--;
         if (cooldown<=0) {
@@ -134,12 +136,13 @@ public class Customer
             if (!hasMachine) {
 
                 //if there is an isle below the AI, look at all washers down those rows.
-                if (moves.contains(3) && locX!=0) {
+                if (moves.contains(3) && locX!=0 && !checked) {
                     //if there are machines above it and to the left, check those machines
                     int offsetY = 0;
                     while(GameController.gameEngine.tiles.get((int) (locY+1+offsetY)).get((int)(locX-1)) instanceof Machine) {
                         Machine t = (Machine)GameController.gameEngine.tiles.get((int) (locY+1+offsetY)).get((int)(locX-1));
                         if (t.getAvailable()) {
+//                            System.out.println("Found machine.");
                             machineX = (int)locX-1;
                             machineY = (int)locY+1+offsetY;
                             hasMachine = true;
@@ -153,6 +156,7 @@ public class Customer
                     while(GameController.gameEngine.tiles.get((int) (locY+1+offsetY)).get((int)(locX-1)) instanceof Machine) {
                         Machine t = (Machine)GameController.gameEngine.tiles.get((int) (locY+1+offsetY)).get((int)(locX-1));
                         if (t.getAvailable()) {
+//                            System.out.println("Found machine (2).");
                             machineX = (int)locX-1;
                             machineY = (int)locY+1+offsetY;
                             hasMachine = true;
@@ -161,13 +165,18 @@ public class Customer
                         }
                         offsetY++;
                     }
+                    checked = true;
                 } else {
+                    checked = false;
                     //move right if possible, else stop and get unsatisfied.
-                    System.out.println(moves);
+//                    System.out.println(moves);
+
+
+//                    visitCooldown = 60+(int)((float)(1.1F-satisfaction/100)*(120+Math.random()*240));
+
                     if (moves.contains(2)) {
                         move("right");
                     } else {
-                        System.out.println("Leaving!");
                         leaving = true;
                         satisfaction-=30+Math.random()*15;
                     }
@@ -283,7 +292,7 @@ public class Customer
     }
 
     public boolean atDoor() {
-        return (GameController.gameEngine.tiles.get((int) locY).get((int)locX) instanceof DoorTile);
+        return (GameController.gameEngine.tiles.get((int) locY).get((int)locX-1) instanceof DoorTile);
     }
 
 }
