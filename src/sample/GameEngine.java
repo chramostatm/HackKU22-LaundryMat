@@ -77,17 +77,19 @@ public class GameEngine
     }
 
     public void repair() {
-        if(repairCost < balanceSheet.currentCapital)
+        if(repairCost < balanceSheet.currentCapital);
+        System.out.println(balanceSheet.currentCapital);
         {
             for(int i =0; i<tiles.size(); i++)
             {
                 for (int j=0; j<tiles.get(i).size();j++)
                 {
                     Tile curTile = tiles.get(i).get(j);
-                    if (curTile instanceof Machine && ((Machine)curTile).isSpecialTile()  && !((Machine)curTile).getAvailable())
+                    if (curTile instanceof Machine && ((Machine)curTile).isSpecialTile() && !((Machine)curTile).getAvailable())
                     {
                         balanceSheet.repair();
                         ((Machine)curTile).setAvailable(true);
+                        System.out.println(balanceSheet.currentCapital);
                     }
                 }
             }

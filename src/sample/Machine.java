@@ -4,21 +4,15 @@ import static sample.Constants.FRAME_RATE;
 
 public class Machine extends Tile
 {
-    private boolean available = false; //stores if the machine is ready to be occupied with another user.
-    private boolean active = false;
+    private boolean available = true; //stores if the machine is ready to be occupied with another user.
+    private boolean active = true; //not broken
     private int timeUntilComplete = 0; // in frames
     private boolean done = false; //stores if the machine is ready to be unloaded.
     private boolean upgraded = false;
     private int uses = 0;
     private boolean specialTile = false;
-    private boolean boughten;
     public Machine(float inX,float inY) {
         super(inX, inY);
-    }
-
-    public boolean isBoughten()
-    {
-        return boughten;
     }
 
     public void setBoughten(boolean inBool)
