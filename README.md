@@ -8,3 +8,4 @@ paying off and leveraging debts, taxes (maybe?):), and keeping customers happy
 #TODO
 update balance on GUI
 partial pay debt button
+add Options menu
