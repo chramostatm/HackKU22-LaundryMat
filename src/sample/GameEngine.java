@@ -81,7 +81,7 @@ public class GameEngine
                     if (curTile instanceof Machine && ((Machine)curTile).isSpecialTile() && ((Machine)curTile).isBroken())
                     {
                         balanceSheet.repair();
-                        ((Machine)curTile).setBroken(true);
+                        ((Machine)curTile).setBroken(false);
                     }
                 }
             }
