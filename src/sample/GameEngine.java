@@ -118,7 +118,7 @@ public class GameEngine
             //100 milliseconds (.1 seconds)
             //runs every frame.
             if (difference>=rate) {
-                speedModifier = (int)Math.min(1, speedModifier-(0.1F/30F)*speedModifier);
+                speedModifier = (int)Math.max(1, speedModifier-(0.1F/30F)*speedModifier);
                 GameController.graphics.draw();
                 frameCounter = (frameCounter + 1) % FRAME_RATE;
 
@@ -134,7 +134,7 @@ public class GameEngine
                 if (visitCooldown<=0) {
                     customers.add(new Customer(null, 100));
 
-                    visitCooldown = 60+(int)((1.1F-satisfaction/100)*(30+Math.random()*120))/Math.min(speedModifier, 1);
+                    visitCooldown = 60+(int)((1.1F-satisfaction/100)*(30+Math.random()*120))/speedModifier;
                 }
 
                 //lowers a machine's cooldown over time.
