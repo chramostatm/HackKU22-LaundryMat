@@ -93,6 +93,7 @@ public class Graphics
         gamePane.setOnMouseClicked(event ->
         {
             buttonBox.setVisible(true);
+            engine.repair();
         });
 
         VBox mainBox = new VBox();
