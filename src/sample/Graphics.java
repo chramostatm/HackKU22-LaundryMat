@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -33,6 +34,8 @@ public class Graphics
     GameEngine engine;
     Image washer = new Image(new File("src/images/washingMachine.png").toURI().toString());
     Image brokenWasher = new Image(new File("src/images/brokenMachine.png").toURI().toString());
+    Menu balanceMenu;
+    Menu debtMenu;
 
     //Image wall = new Image(new File("src/images/wall.jpg").toURI().toString());
     Image customer = new Image(new File("src/images/customer.jpg").toURI().toString());
@@ -84,8 +87,12 @@ public class Graphics
            primaryStage.close();
         });
 
+        // Create an empty Label to display the owner's balance.
+        balanceMenu = new Menu();
+        debtMenu = new Menu();
+
         // Add the File menu to the menu bar.
-        menuBar.getMenus().add(fileMenu);
+        menuBar.getMenus().addAll(fileMenu, balanceMenu, debtMenu);
 
         Button upgrade = new Button();
         upgrade.setText("Upgrade");
@@ -95,6 +102,7 @@ public class Graphics
 
         Button close = new Button();
         close.setText("Close");
+
         HBox buttonBox = new HBox();
         buttonBox.setVisible(false);
         buttonBox.setAlignment(Pos.CENTER);
@@ -214,6 +222,8 @@ public class Graphics
                 new Circle(e.getLocX()*75+37.5F, e.getLocY()*75+37.5F, 37.5F)
         ));
 
+        balanceMenu.setText(String.format("balance: $%.2f", engine.balanceSheet.currentCapital));
+        debtMenu.setText(String.format("debt: $%.2f", engine.balanceSheet.debt));
     }
     public void showScene(Scene inScene)
     {
