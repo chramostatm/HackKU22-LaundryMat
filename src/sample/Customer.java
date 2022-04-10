@@ -127,8 +127,8 @@ public class Customer
 
         cooldown--;
         if (cooldown<=0) {
+            cooldown = (int) (15 + 2*Math.random());
             if (leaving) {
-                cooldown = (int) (15 + 2*Math.random());
                 moveToExit();
                 return;
             }
@@ -206,7 +206,6 @@ public class Customer
 
 
 
-            cooldown=15+ (int) (Math.random() * 2);
         }
     }
 
@@ -259,7 +258,7 @@ public class Customer
             return;
         }
         if (locY<machineY && moves.contains(3)) {
-            move("up");
+            move("down");
         }
     }
 
