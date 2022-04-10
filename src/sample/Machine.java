@@ -24,6 +24,11 @@ public class Machine extends Tile
         specialTile = inBool;
     }
 
+    public boolean isSpecialTile()
+    {
+        return specialTile;
+    }
+
     public boolean getActive() {
         return this.active;
     }

@@ -57,7 +57,8 @@ public class Graphics
 
         repair.setOnAction(event ->
         {
-            engine.tiles.stream().filter(outerList -> outerList.stream().filter(tile -> tile instanceof Machine).collect(Collectors.toList()).stream().);
+            engine.tiles.stream().forEach(outerList -> outerList.stream().filter(tile -> !(tile instanceof Machine)).
+                    collect(Collectors.toList()).stream().filter(e -> !((Machine)e).isSpecialTile()));
             buttonBox.setVisible(false);
         });
         close.setOnAction(event ->
@@ -80,8 +81,6 @@ public class Graphics
                 }catch (Exception e){}
 
             }
-            System.out.println("the tile is" + ((Machine)engine.tiles.get((int) Math.floor(event.getY()/75))
-                    .get((int) Math.floor(event.getX()/75))));
         });
 
         VBox mainBox = new VBox();
