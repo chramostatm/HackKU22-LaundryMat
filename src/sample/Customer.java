@@ -159,7 +159,7 @@ public class Customer
                         Machine t = (Machine)GameController.gameEngine.tiles.get((int) (locY+1+offsetY)).get((int)(locX+1));
                         if (t.getAvailable()) {
 //                            System.out.println("Found machine (2).");
-                            machineX = (int)locX-1;
+                            machineX = (int)locX+1;
                             machineY = (int)locY+1+offsetY;
                             hasMachine = true;
                             satisfaction+=10+10*Math.random();
