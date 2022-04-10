@@ -21,13 +21,9 @@ public class GameEngine
 
     public GameEngine(){
         start();
-        displayShop();
         //continue here.
     }
 
-    public static void main(String[] args) {
-        new GameEngine();
-    }
     public void start() {
         timer = new GameTimer();
         timer.start();
