@@ -24,7 +24,7 @@ public class Customer
     {
         weight = lbs;
         locX = 0.0;           // assuming the laundromat door is in the lower left corner of the map
-        locY = 0.0;
+        locY = 1.0;
 
         // Names to randomly choose from if 'custName' parameter is null.
         String[] names = {"Liam", "Olivia", "Noah", "Emma", "Oliver", "Ava", "Elijah", "Charlotte",
