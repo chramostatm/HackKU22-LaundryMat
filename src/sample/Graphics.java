@@ -59,6 +59,7 @@ public class Graphics
 
         repair.setOnAction(event ->
         {
+            engine.repair();
             engine.tiles.stream().forEach(outerList -> outerList.stream().filter(tile -> !(tile instanceof Machine)).
                     collect(Collectors.toList()).stream().filter(e -> !((Machine)e).isSpecialTile()));
             buttonBox.setVisible(false);
@@ -93,7 +94,6 @@ public class Graphics
         gamePane.setOnMouseClicked(event ->
         {
             buttonBox.setVisible(true);
-            engine.repair();
         });
 
         VBox mainBox = new VBox();

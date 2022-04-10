@@ -13,13 +13,15 @@ public class BalanceSheet {
         this.interest = interest;
     }
     public BalanceSheet() {
-        this.debt = 0;
-        this.currentCapital = 0;
-        this.interest = 0;
     }
 
     public float getCurrentCapital() {
         return currentCapital;
+    }
+
+    public void repair()
+    {
+        currentCapital -= Constants.repairCost;
     }
 
     public void setCurrentCapital(float inCapital)
