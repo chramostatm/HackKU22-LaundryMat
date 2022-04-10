@@ -177,7 +177,7 @@ public class Customer
 //                    visitCooldown = 60+(int)((float)(1.1F-satisfaction/100)*(120+Math.random()*240));
 
                     if (moves.contains(2)) {
-                        System.out.println(locX);
+                        //System.out.println(locX);
                         move("right");
                     } else {
                         leaving = true;

@@ -85,8 +85,9 @@ public class GameEngine
                 for (int j=0; j<tiles.get(i).size();j++)
                 {
                     Tile curTile = tiles.get(i).get(j);
-                    if (curTile instanceof Machine && ((Machine)curTile).isSpecialTile() && !((Machine)curTile).getAvailable())
+                    if (curTile instanceof Machine && ((Machine)curTile).isSpecialTile()  && !((Machine)curTile).getAvailable())
                     {
+                        balanceSheet.repair();
                         ((Machine)curTile).setAvailable(true);
                     }
                 }

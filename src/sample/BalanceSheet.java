@@ -12,8 +12,8 @@ public class BalanceSheet {
         this.currentCapital = startCapital;
         this.interest = interest;
     }
-    public BalanceSheet() {
-    }
+    public BalanceSheet()
+    {}
 
     public float getCurrentCapital() {
         return currentCapital;
