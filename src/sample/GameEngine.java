@@ -156,8 +156,10 @@ public class GameEngine
 
                 //five minutes, then a fifteen second break.
                 if (frameCounter == 0) {
-                    secondCounter = (secondCounter + 1) % 315;
-                    if (secondCounter >= 300) {
+                    secondCounter = (secondCounter + 1) % 75;
+                    if (secondCounter == 60) {
+                        GameController.gameEngine.balanceSheet.debt+=GameController.gameEngine.balanceSheet.debt
+                                *GameController.gameEngine.balanceSheet.interest;
                         dayCounter++;
                         //do more things after the day passes.
                     }
