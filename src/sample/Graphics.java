@@ -53,6 +53,7 @@ public class Graphics
         Button close = new Button();
         close.setText("Close");
         HBox buttonBox = new HBox();
+        buttonBox.setVisible(false);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.getChildren().addAll(upgrade, repair, close);
 
@@ -77,11 +78,21 @@ public class Graphics
             {
                 try
                 {
+                    engine.tiles.stream().forEach(e -> e.stream().filter(tile -> tile instanceof Machine).
+                            collect(Collectors.toList()).stream().forEach(machine -> ((Machine)machine).setSpecialTile(false)));
                     ((Machine)engine.tiles.get((int) Math.floor(event.getY()/75))
                             .get((int) Math.floor(event.getX()/75))).setSpecialTile(true);
-                }catch (Exception e){}
 
+                    ((Machine)engine.tiles.get((int) Math.floor(event.getY()/75))
+                            .get((int) Math.floor(event.getX()/75))).setSpecialTile(true);
+                }catch (Exception e)
+                {}
             }
+        });
+
+        gamePane.setOnMouseClicked(event ->
+        {
+            buttonBox.setVisible(true);
         });
 
         VBox mainBox = new VBox();
@@ -106,12 +117,25 @@ public class Graphics
 
                 if(t instanceof Machine)
                 {
-                    currentNode = new ImageView(washer);
-                    ((ImageView) currentNode).setFitHeight(75);
-                    ((ImageView) currentNode).setFitWidth(75);
-                    ((ImageView) currentNode).setPreserveRatio(true);
-                    ((ImageView) currentNode).setX(j*75);
-                    ((ImageView) currentNode).setY(i*75);
+                    if(((Machine)t).isSpecialTile())
+                    {
+                        currentNode = new ImageView(washer);
+                        ((ImageView) currentNode).setFitHeight(95);
+                        ((ImageView) currentNode).setFitWidth(95);
+                        ((ImageView) currentNode).setPreserveRatio(true);
+                        ((ImageView) currentNode).setX((j-1)*75 +65);
+                        ((ImageView) currentNode).setY((i-1)*75 +65);
+                    }else
+                    {
+                        currentNode = new ImageView(washer);
+                        ((ImageView) currentNode).setFitHeight(75);
+                        ((ImageView) currentNode).setFitWidth(75);
+                        ((ImageView) currentNode).setPreserveRatio(true);
+                        ((ImageView) currentNode).setX(j * 75);
+                        ((ImageView) currentNode).setY(i * 75);
+                    }
+
+
                 }
                 else if(t instanceof Wall)
                 {

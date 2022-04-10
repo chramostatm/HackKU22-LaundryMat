@@ -1,6 +1,5 @@
 package sample;
 import static sample.Constants.FRAME_RATE;
-import java.util.Random;
 
 public class Machine extends Tile
 {
