@@ -10,12 +10,23 @@ public class Machine extends Tile
     private boolean done = false; //stores if the machine is ready to be unloaded.
     private boolean upgraded = false;
     private int uses = 0;
+    private boolean specialTile = false;
     public Machine(float inX,float inY) {
         super(inX, inY);
     }
 
     public boolean getAvailable() {
         return this.available;
+    }
+
+    public void setSpecialTile(boolean inBool)
+    {
+        specialTile = inBool;
+    }
+
+    public boolean isSpecialTile()
+    {
+        return specialTile;
     }
 
     public boolean getActive() {
