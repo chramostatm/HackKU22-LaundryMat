@@ -6,6 +6,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import static javafx.application.Platform.exit;
 import static sample.Constants.*;
@@ -18,16 +19,13 @@ public class GameEngine
     public ArrayList<Customer> customers = new ArrayList<>();
     public BalanceSheet balanceSheet = new BalanceSheet();
     private GameTimer timer;
+    private int satisfaction = 50;
 
     public GameEngine(){
         start();
-        displayShop();
         //continue here.
     }
 
-    public static void main(String[] args) {
-        new GameEngine();
-    }
     public void start() {
         timer = new GameTimer();
         timer.start();
@@ -74,8 +72,18 @@ public class GameEngine
                     }
                     System.out.print("\n");
                 }
-
         );
+    }
+
+    public void repair() {
+        if(repairCost < balanceSheet.currentCapital)
+        {
+            tiles.stream().forEach(e -> e.
+                    stream().filter(object -> object instanceof Machine).collect(Collectors.toList()).
+                    stream().filter(machine -> ((Machine)machine).isSpecialTile()).collect(Collectors.toList()).
+                    stream().forEach(special -> ((Machine)special).setAvailable(true)));
+            balanceSheet.currentCapital -= repairCost;
+        }
     }
 
     private class GameTimer extends AnimationTimer {
@@ -86,6 +94,7 @@ public class GameEngine
         private int dayCounter = 0;
         private int secondCounter = 0;
         private int frameCounter = 0;
+        private int visitCooldown = 30;
 
         //Keeps track of when to stop.
 //        int order;
@@ -115,6 +124,14 @@ public class GameEngine
                 }
                 //determines if it's time to increase debt via interest.
                 //...
+
+                //determine if a customer should spawn
+                visitCooldown--;
+                if (visitCooldown<=0) {
+                    customers.add(new Customer(null, 100));
+
+                    visitCooldown = (int)((float)(1-satisfaction/100)*(150+Math.random()*90));
+                }
 
                 //lowers a machine's cooldown over time.
                 for (int i = 0; i < ySize; i++) {

@@ -1,6 +1,6 @@
 package sample;
+
 import static sample.Constants.FRAME_RATE;
-import java.util.Random;
 
 public class Machine extends Tile
 {
@@ -11,8 +11,19 @@ public class Machine extends Tile
     private boolean upgraded = false;
     private int uses = 0;
     private boolean specialTile = false;
+    private boolean boughten;
     public Machine(float inX,float inY) {
         super(inX, inY);
+    }
+
+    public boolean isBoughten()
+    {
+        return boughten;
+    }
+
+    public void setBoughten(boolean inBool)
+    {
+        boughten = inBool;
     }
 
     public boolean getAvailable() {
@@ -41,7 +52,8 @@ public class Machine extends Tile
         this.available = available;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(boolean active)
+    {
         this.active = active;
     }
 

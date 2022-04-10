@@ -17,5 +17,14 @@ public class BalanceSheet {
         this.currentCapital = 0;
         this.interest = 0;
     }
+
+    public float getCurrentCapital() {
+        return currentCapital;
+    }
+
+    public void setCurrentCapital(float inCapital)
+    {
+        currentCapital = inCapital;
+    }
 }
 
