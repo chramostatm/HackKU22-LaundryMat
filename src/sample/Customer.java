@@ -235,8 +235,8 @@ public class Customer
             int y = (int) (locY - (Math.abs((i) % 4 - 2) - 1));
             if (y<0 || y>GameController.gameEngine.ySize-1) continue;
 
-            if (GameController.gameEngine.tiles.get(x)
-                    .get(y) instanceof EmptyTile) {
+            if (GameController.gameEngine.tiles.get(y)
+                    .get(x) instanceof EmptyTile) {
                 moves.add(i+1);
             }
         }
