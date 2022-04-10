@@ -122,6 +122,15 @@ public class Graphics
         });
         bigButtonBox.getChildren().addAll(buttonBox, pay50);
 
+        Button advertise = new Button();
+        pay50.setText("Advertise!");
+        pay50.setOnAction(event ->
+        {
+            GameController.gameEngine.speedModifier+=0.1F;
+
+        });
+        bigButtonBox.getChildren().addAll(buttonBox, pay50);
+
         repair.setOnAction(event ->
         {
             engine.repair();
