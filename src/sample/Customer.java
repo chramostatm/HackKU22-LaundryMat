@@ -11,6 +11,8 @@ public class Customer
     private final float weight;     // the weight of the laundry being cleaned
     private double locX;            // the X-coordinate location of the customer
     private double locY;            // the Y-coordinate location of the customer
+    private double machineX;        // the X-coordinate of the customer's machine they are using.
+    private double machineY;        // the Y-coordinate of the customer's machine they are using.
 
     /**
      * Constructor
@@ -22,7 +24,7 @@ public class Customer
     {
         weight = lbs;
         locX = 0.0;           // assuming the laundromat door is in the lower left corner of the map
-        locY = 0.0;
+        locY = 1.0;
 
         // Names to randomly choose from if 'custName' parameter is null.
         String[] names = {"Liam", "Olivia", "Noah", "Emma", "Oliver", "Ava", "Elijah", "Charlotte",
@@ -130,5 +132,24 @@ public class Customer
             }
         }
         return moves;
+    }
+
+    public void moveToMachine() {
+        ArrayList<Integer> moves = possibleMoves();
+        if (locY>machineY && moves.contains(1)) {
+            move("down");
+            return;
+        }
+        if (locX<machineX && moves.contains(2)) {
+            move("right");
+            return;
+        }
+        if (locX>machineX && moves.contains(4)) {
+            move("left");
+            return;
+        }
+        if (locY<machineY && moves.contains(1)) {
+            move("up");
+        }
     }
 }

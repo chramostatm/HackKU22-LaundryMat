@@ -9,7 +9,6 @@ public class Machine extends Tile
     private int timeUntilComplete = 0; // in frames
     private boolean done = false; //stores if the machine is ready to be unloaded.
     private int uses = 0;
-
     public Machine(float inX,float inY) {
         super(inX, inY);
     }
@@ -41,7 +40,7 @@ public class Machine extends Tile
             uses++;
                 if(uses > 10) {
                     Random random = new Random();
-                    int value = random.nextInt(1 - 10);
+                    int value = random.nextInt(10);
                         if (value == 1) {
                             active = false;
                     }
