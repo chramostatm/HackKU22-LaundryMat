@@ -249,16 +249,16 @@ public class Customer
             move("up");
             return;
         }
+        if (locY<machineY && moves.contains(3)) {
+            move("down");
+            return;
+        }
         if (locX<machineX && moves.contains(2)) {
             move("right");
             return;
         }
         if (locX>machineX && moves.contains(4)) {
             move("left");
-            return;
-        }
-        if (locY<machineY && moves.contains(3)) {
-            move("down");
         }
     }
 
