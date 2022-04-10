@@ -33,9 +33,9 @@
                   <BoxBlur />
                </effect>
             </ImageView>
-            <Button layoutX="176.0" layoutY="142.0" mnemonicParsing="false" onMouseClicked="#startGame" text="Start Game" />
-            <Button layoutX="176.0" layoutY="176.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Options" />
-            <Label layoutX="145.0" layoutY="35.0" text="Sud Tycoon!" textFill="#4b90f2" styleClass="outline">
+            <Button layoutX="181.0" layoutY="106.0" mnemonicParsing="false" onMouseClicked="#startGame" text="Start Game" />
+            <Button layoutX="181.0" layoutY="143.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Options" />
+            <Label layoutX="145.0" layoutY="35.0" styleClass="outline" text="Sud Tycoon!" textFill="#4b90f2">
                <font>
                   <Font name="Agency FB Bold" size="36.0" />
                </font>
