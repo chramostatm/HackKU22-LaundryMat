@@ -202,7 +202,7 @@ public class Graphics
 
                 if (t instanceof Machine && !((Machine)t).getAvailable())
                 {
-                    Arc waitDisplay = new Arc(j*75+32.5,i*75+32.5,25,25,90,(((Machine)t).timeUntilComplete));
+                    Arc waitDisplay = new Arc(j*75+32.5,i*75+37.5,25,25,90,(((Machine)t).timeUntilComplete));
                     waitDisplay.setType(ArcType.ROUND);
                     waitDisplay.setFill(Color.BLUE);
                     gamePane.getChildren().add(waitDisplay);
