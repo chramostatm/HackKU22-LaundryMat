@@ -13,6 +13,8 @@ public class Customer
     private double locY;            // the Y-coordinate location of the customer
     private double machineX;        // the X-coordinate of the customer's machine they are using.
     private double machineY;        // the Y-coordinate of the customer's machine they are using.
+    private boolean hasMachine = false;
+    private int cooldown = 15;
 
     /**
      * Constructor
@@ -88,13 +90,13 @@ public class Customer
                     locX--;
                     break;
                 case "up":
-                    locY++;
+                    locY--;
                     break;
                 case "right":
                     locX++;
                     break;
                 case "down":
-                    locY--;
+                    locY++;
                     break;
             }
         }
@@ -109,7 +111,14 @@ public class Customer
      */
     public void think()
     {
+        cooldown--;
+        if (cooldown<=0) {
+            //find machine they can use.
 
+
+
+            cooldown=15+ (int) (Math.random() * 2);
+        }
     }
 
     /**

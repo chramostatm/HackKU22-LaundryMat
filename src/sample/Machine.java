@@ -38,13 +38,9 @@ public class Machine extends Tile
         if (timeUntilComplete<=0) {
             done = true;
             uses++;
-                if(uses > 10) {
-                    Random random = new Random();
-                    int value = random.nextInt(10);
-                        if (value == 1) {
-                            active = false;
-                    }
-                }
+            if(uses > 10) {
+                active = ((int)(Math.random()*10)!=1);
+            }
         }
     }
 }
