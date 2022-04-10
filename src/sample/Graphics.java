@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -14,7 +16,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import javax.crypto.Mac;
 import java.io.File;
+import java.util.stream.Collectors;
 
 
 public class Graphics
@@ -23,7 +27,8 @@ public class Graphics
     Pane gamePane;
     GameEngine engine;
     Image washer = new Image(new File("src/images/washing-machine.jpg").toURI().toString());
-    Image wall = new Image(new File("src/images/wall.jpg").toURI().toString());
+
+    //Image wall = new Image(new File("src/images/wall.jpg").toURI().toString());
     Image customer = new Image(new File("src/images/customer.jpg").toURI().toString());
 
     public Graphics(Stage inPrimaryStage)
@@ -49,6 +54,35 @@ public class Graphics
         HBox buttonBox = new HBox();
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.getChildren().addAll(upgrade, repair, close);
+
+        repair.setOnAction(event ->
+        {
+            engine.tiles.stream().filter(outerList -> outerList.stream().filter(tile -> tile instanceof Machine).collect(Collectors.toList()).stream().);
+            buttonBox.setVisible(false);
+        });
+        close.setOnAction(event ->
+        {
+            buttonBox.setVisible(false);
+        });
+        upgrade.setOnAction(event ->
+        {
+            buttonBox.setVisible(false);
+        });
+
+        gamePane.setOnMouseMoved(event ->
+        {
+            if(!buttonBox.isVisible())
+            {
+                try
+                {
+                    ((Machine)engine.tiles.get((int) Math.floor(event.getY()/75))
+                            .get((int) Math.floor(event.getX()/75))).setSpecialTile(true);
+                }catch (Exception e){}
+
+            }
+            System.out.println("the tile is" + ((Machine)engine.tiles.get((int) Math.floor(event.getY()/75))
+                    .get((int) Math.floor(event.getX()/75))));
+        });
 
         VBox mainBox = new VBox();
         mainBox.setAlignment(Pos.CENTER);
@@ -89,9 +123,6 @@ public class Graphics
                     ((Rectangle) currentNode).setFill(Color.WHITE);
                 }
                 gamePane.getChildren().add(currentNode);
-//                Rectangle r = new Rectangle(j*75, i*75, 75, 75);
-//                r.setFill((t instanceof Wall) ? Color.BLACK : (t instanceof Machine) ? Color.PURPLE : Color.WHITE);
-//                gamePane.getChildren().add(r);
             }
         }
     }
