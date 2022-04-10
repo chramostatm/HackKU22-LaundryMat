@@ -124,12 +124,14 @@ public class Customer
     public void think()
     {
         if (left) return;
-        if (leaving) {
-            moveToExit();
-            return;
-        }
+
         cooldown--;
         if (cooldown<=0) {
+            if (leaving) {
+                cooldown = (int) (15 + 2*Math.random());
+                moveToExit();
+                return;
+            }
             //find machine they can use.
             ArrayList<Integer> moves = possibleMoves();
 
@@ -153,8 +155,8 @@ public class Customer
                     }
                     //if there are machines above it and to the right, check those machines
                     offsetY = 0;
-                    while(GameController.gameEngine.tiles.get((int) (locY+1+offsetY)).get((int)(locX-1)) instanceof Machine) {
-                        Machine t = (Machine)GameController.gameEngine.tiles.get((int) (locY+1+offsetY)).get((int)(locX-1));
+                    while(GameController.gameEngine.tiles.get((int) (locY+1+offsetY)).get((int)(locX+1)) instanceof Machine) {
+                        Machine t = (Machine)GameController.gameEngine.tiles.get((int) (locY+1+offsetY)).get((int)(locX+1));
                         if (t.getAvailable()) {
 //                            System.out.println("Found machine (2).");
                             machineX = (int)locX-1;
@@ -175,6 +177,7 @@ public class Customer
 //                    visitCooldown = 60+(int)((float)(1.1F-satisfaction/100)*(120+Math.random()*240));
 
                     if (moves.contains(2)) {
+                        System.out.println(locX);
                         move("right");
                     } else {
                         leaving = true;
@@ -224,6 +227,7 @@ public class Customer
         //1 (2): right  x: 1,  y: 0
         //2 (3): down   x: 0,   y: -1
         //3 (4): left   x: -1,   y: 0
+
         for (int i=0; i<4; i++) {
 
             int x = (int) (locX + Math.abs((i + 3) % 4 - 2) - 1);
