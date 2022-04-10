@@ -1,3 +1,5 @@
-# HackKU22-LaundryMat
+## HackKU22-LaundryMat
+Want to play a game?
 
-Hey A
+
+#TODO
