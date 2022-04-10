@@ -31,7 +31,6 @@ public class Customer
         weight = lbs;
         locX = 0.0;           // assuming the laundromat door is in the lower left corner of the map
         locY = 1.0;
-
         // Names to randomly choose from if 'custName' parameter is null.
         String[] names = {"Liam", "Olivia", "Noah", "Emma", "Oliver", "Ava", "Elijah", "Charlotte",
                             "William", "Sophia", "James", "Amelia", "Benjamin", "Isabella", "Lucas",
@@ -123,6 +122,7 @@ public class Customer
      */
     public void think()
     {
+        if (left) return;
         if (leaving) {
             moveToExit();
         }
@@ -134,10 +134,10 @@ public class Customer
             if (!hasMachine) {
 
                 //if there is an isle below the AI, look at all washers down those rows.
-                if (moves.contains(3)) {
+                if (moves.contains(3) && locX!=0) {
                     //if there are machines above it and to the left, check those machines
                     int offsetY = 0;
-                    while(GameController.gameEngine.tiles.get((int) (locY+1)).get((int)(locX-1)) instanceof Machine) {
+                    while(GameController.gameEngine.tiles.get((int) (locY+1+offsetY)).get((int)(locX-1)) instanceof Machine) {
                         Machine t = (Machine)GameController.gameEngine.tiles.get((int) (locY+1+offsetY)).get((int)(locX-1));
                         if (t.getAvailable()) {
                             machineX = (int)locX-1;
@@ -150,7 +150,7 @@ public class Customer
                     }
                     //if there are machines above it and to the right, check those machines
                     offsetY = 0;
-                    while(GameController.gameEngine.tiles.get((int) (locY+1)).get((int)(locX+1)) instanceof Machine) {
+                    while(GameController.gameEngine.tiles.get((int) (locY+1+offsetY)).get((int)(locX-1)) instanceof Machine) {
                         Machine t = (Machine)GameController.gameEngine.tiles.get((int) (locY+1+offsetY)).get((int)(locX-1));
                         if (t.getAvailable()) {
                             machineX = (int)locX-1;
@@ -163,9 +163,12 @@ public class Customer
                     }
                 } else {
                     //move right if possible, else stop and get unsatisfied.
+                    System.out.println(moves);
                     if (moves.contains(2)) {
                         move("right");
                     } else {
+                        System.out.println("Leaving!");
+                        leaving = true;
                         satisfaction-=30+Math.random()*15;
                     }
                 }
@@ -207,10 +210,21 @@ public class Customer
 
     public ArrayList<Integer> possibleMoves() {
         ArrayList<Integer> moves = new ArrayList<>();
+
+        //0 (1): up     x: 0,   y: 1
+        //1 (2): right  x: 1,  y: 0
+        //2 (3): down   x: 0,   y: -1
+        //3 (4): left   x: -1,   y: 0
         for (int i=0; i<4; i++) {
 
-            if (GameController.gameEngine.tiles.get((int) (locY + Math.abs((i + 1) % 4 - 2) - 1))
-                    .get((int) (locX + Math.abs((i + 2) % 4 - 2) - 1)) instanceof EmptyTile) {
+            int x = (int) (locX + Math.abs((i + 3) % 4 - 2) - 1);
+            if (x<0 || x>GameController.gameEngine.xSize-1) continue;
+
+            int y = (int) (locY - (Math.abs((i) % 4 - 2) - 1));
+            if (y<0 || y>GameController.gameEngine.ySize-1) continue;
+
+            if (GameController.gameEngine.tiles.get(x)
+                    .get(y) instanceof EmptyTile) {
                 moves.add(i+1);
             }
         }
@@ -220,7 +234,7 @@ public class Customer
     public void moveToMachine() {
         ArrayList<Integer> moves = possibleMoves();
         if (locY>machineY && moves.contains(1)) {
-            move("down");
+            move("up");
             return;
         }
         if (locX<machineX && moves.contains(2)) {
@@ -231,7 +245,7 @@ public class Customer
             move("left");
             return;
         }
-        if (locY<machineY && moves.contains(1)) {
+        if (locY<machineY && moves.contains(3)) {
             move("up");
         }
     }

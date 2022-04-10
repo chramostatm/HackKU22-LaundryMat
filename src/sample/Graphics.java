@@ -127,7 +127,7 @@ public class Graphics
         }
         //draw customer
         engine.customers.forEach(e -> gamePane.getChildren().add(
-                new Circle(e.getLocX(), e.getLocY(), 37.5F)
+                new Circle(e.getLocX()*75+37.5F, e.getLocY()*75+37.5F, 37.5F)
         ));
 
     }
