@@ -20,6 +20,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.stream.Collectors;
 
@@ -30,6 +32,7 @@ public class Graphics
     Pane gamePane;
     GameEngine engine;
     Image washer = new Image(new File("src/images/washing-machine.jpg").toURI().toString());
+    Image brokenWasher;
 
     //Image wall = new Image(new File("src/images/wall.jpg").toURI().toString());
     Image customer = new Image(new File("src/images/customer.jpg").toURI().toString());
@@ -45,6 +48,8 @@ public class Graphics
         Group root = new Group();
         gamePane = new Pane();
         engine = inEngine;
+
+        //brokenWasher.se
 
         // Create the menu bar.
         MenuBar menuBar = new MenuBar();

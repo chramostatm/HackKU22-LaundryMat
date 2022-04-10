@@ -71,22 +71,21 @@ public class GameEngine
     }
 
     public void repair() {
-        if(repairCost < balanceSheet.currentCapital)
+        if(Constants.repairCost <= balanceSheet.currentCapital)
         {
             for(int i =0; i<tiles.size(); i++)
             {
                 for (int j=0; j<tiles.get(i).size();j++)
                 {
                     Tile curTile = tiles.get(i).get(j);
-                    if (curTile instanceof Machine && ((Machine)curTile).isSpecialTile()  && ((Machine)curTile).isBroken())
+                    if (curTile instanceof Machine && ((Machine)curTile).isSpecialTile() && ((Machine)curTile).isBroken())
                     {
                         balanceSheet.repair();
-                        ((Machine)curTile).setAvailable(true);
+                        ((Machine)curTile).setBroken(true);
                     }
                 }
             }
         }
-        System.out.println(balanceSheet.currentCapital);
     }
 
     private class GameTimer extends AnimationTimer {

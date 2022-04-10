@@ -8,7 +8,7 @@ public class Machine extends Tile
     private int timeUntilComplete = 0; // in frames
     private boolean done = false; //stores if the machine is ready to be unloaded.
     private boolean upgraded = false;
-    public boolean broken = false;
+    public boolean broken = true;
     private int uses = 0;
     private boolean specialTile = false;
     public Machine(float inX,float inY) {
@@ -18,6 +18,11 @@ public class Machine extends Tile
     public boolean isBroken()
     {
         return broken;
+    }
+
+    public void setBroken(boolean inBool)
+    {
+        broken = inBool;
     }
 
     public boolean getAvailable() {
@@ -52,7 +57,8 @@ public class Machine extends Tile
             done = true;
             uses++;
             if(uses > 10) {
-                broken = ((int)(Math.random()*10)!=1);
+                if (!broken)
+                    broken = ((int)(Math.random()*10)!=1);
             }
         }
     }
