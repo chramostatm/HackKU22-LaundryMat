@@ -1,13 +1,7 @@
 package sample;
 
 import javafx.animation.AnimationTimer;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-
-import javax.crypto.Mac;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import static javafx.application.Platform.exit;
 import static sample.Constants.*;
