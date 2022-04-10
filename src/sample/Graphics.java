@@ -17,6 +17,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -198,6 +200,13 @@ public class Graphics
                 }
                 gamePane.getChildren().add(currentNode);
 
+                if (t instanceof Machine && !((Machine)t).getAvailable())
+                {
+                    Arc waitDisplay = new Arc(j*75+32.5,i*75+32.5,25,25,90,(((Machine)t).timeUntilComplete));
+                    waitDisplay.setType(ArcType.ROUND);
+                    waitDisplay.setFill(Color.BLUE);
+                    gamePane.getChildren().add(waitDisplay);
+                }
             }
         }
         //draw customer

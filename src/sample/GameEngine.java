@@ -139,14 +139,15 @@ public class GameEngine
                 for (int i = 0; i < ySize; i++) {
                     for (int j = 0; j < xSize; j++) {
                         //skips non-machine tiles or inactive machines or done machines.
-                        if (!(tiles.get(i).get(j) instanceof Machine) || !(((Machine) tiles.get(i).get(j)).isBroken()) || ((Machine) tiles.get(i).get(j)).getAvailable())
-                            continue;
-                        Machine machine = (Machine) tiles.get(i).get(j);
+                        if ((tiles.get(i).get(j) instanceof Machine) && !(((Machine)tiles.get(i).get(j)).isBroken()) && !((Machine) tiles.get(i).get(j)).getAvailable())
+                        {
+                            Machine machine = (Machine) tiles.get(i).get(j);
 
-                        //don't use this commented out code for now, but when the customer uses a machine, something like this should be used.
+                            //don't use this commented out code for now, but when the customer uses a machine, something like this should be used.
 //                        machine.setTimeUntilComplete(30);
-                        //lower cooldown of machine
-                        machine.washMachine();
+                            //lower cooldown of machine
+                            machine.washMachine();
+                        }
                     }
                 }
 
