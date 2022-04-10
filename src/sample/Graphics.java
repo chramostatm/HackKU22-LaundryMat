@@ -6,7 +6,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -43,6 +50,42 @@ public class Graphics
         Group root = new Group();
         gamePane = new Pane();
         engine = inEngine;
+
+        // Create the menu bar.
+        MenuBar menuBar = new MenuBar();
+
+        // Create the File menu.
+        Menu fileMenu = new Menu("_File");
+        MenuItem aboutItem = new MenuItem("_About");
+        MenuItem exitItem = new MenuItem("E_xit");
+        fileMenu.getItems().addAll(aboutItem, exitItem);
+
+        // Create the Dialog scene to display for the About menu item.
+        Dialog<String> dialog = new Dialog<String>();
+        dialog.setTitle("About Sud Tycoon!");
+        ButtonType type = new ButtonType("OK", ButtonData.OK_DONE);
+        //Setting the content of the dialog
+        dialog.setContentText("This JavaFX game is a submission for the Education Track of the " +
+                "2022 HackKU (https://hackku.org) competition in Lawrence, KS. The group members " +
+                "are all UNK students:\n\tTrenton Chramosta\n\tBlake Meyer\n\tJohn Reagan\n\t" +
+                "Matthew Rokusek\n\tJustin Tilkens\n");
+        //Adding buttons to the dialog pane
+        dialog.getDialogPane().getButtonTypes().add(type);
+
+        // Register an event handler for the about menu item.
+        aboutItem.setOnAction(event ->
+        {
+            dialog.showAndWait();
+        });
+
+        // Register an event handler for the exit item.
+        exitItem.setOnAction(event ->
+        {
+           primaryStage.close();
+        });
+
+        // Add the File menu to the menu bar.
+        menuBar.getMenus().add(fileMenu);
 
         Button upgrade = new Button();
         upgrade.setText("Upgrade");
@@ -86,12 +129,13 @@ public class Graphics
 
         VBox mainBox = new VBox();
         mainBox.setAlignment(Pos.CENTER);
-        mainBox.getChildren().addAll(buttonBox, gamePane);
-
-        Scene gameScene = new Scene(root, 900,750);
-
+        mainBox.getChildren().addAll(menuBar, buttonBox, gamePane);
         root.getChildren().addAll(mainBox);
-        showScene(gameScene);
+
+        // Create a Scene and display it.
+        Scene scene = new Scene(root, 900,750);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     public void draw()
@@ -131,7 +175,6 @@ public class Graphics
         ));
 
     }
-
     public void showScene(Scene inScene)
     {
         primaryStage.setScene(inScene);
