@@ -138,7 +138,7 @@ public class GameEngine
                 if (visitCooldown<=0) {
                     customers.add(new Customer(null, 100));
 
-                    visitCooldown = (int)((float)(1-satisfaction/100)*(150+Math.random()*90));
+                    visitCooldown = 60+(int)((float)(1.1F-satisfaction/100)*(120+Math.random()*240));
                 }
 
                 //lowers a machine's cooldown over time.
