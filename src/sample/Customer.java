@@ -112,8 +112,10 @@ public class Customer
      */
     public void think()
     {
+
         cooldown--;
         if (cooldown<=0) {
+
             //find machine they can use.
             ArrayList<Integer> moves = possibleMoves();
 

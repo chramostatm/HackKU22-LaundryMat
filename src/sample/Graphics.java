@@ -39,8 +39,10 @@ public class Graphics
 
         Button upgrade = new Button();
         upgrade.setText("Upgrade");
+
         Button repair = new Button();
         repair.setText("Repair");
+
         Button close = new Button();
         close.setText("Close");
         HBox buttonBox = new HBox();
