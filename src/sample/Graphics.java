@@ -130,7 +130,7 @@ public class Graphics
         });
 
         speed = new Label();
-        speed.setText("Speed modifier: "+GameController.gameEngine.speedModifier);
+        speed.setText("Speed modifier: "+String.format("%.2f", GameController.gameEngine.speedModifier));
         bigButtonBox.getChildren().addAll(buttonBox, pay50, advertise, speed);
 
         repair.setOnAction(event ->
@@ -266,6 +266,6 @@ public class Graphics
     }
 
     public void setText(float modifier) {
-        speed.setText("Speed Modifier: "+modifier);
+        speed.setText("Speed Modifier: "+String.format("%.2f", modifier));
     }
 }
