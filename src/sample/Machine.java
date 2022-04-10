@@ -4,8 +4,8 @@ import static sample.Constants.FRAME_RATE;
 
 public class Machine extends Tile
 {
-    private boolean available = false; //stores if the machine is ready to be occupied with another user.
-    private int timeUntilComplete = 0; // in frames
+    private boolean available = true; //stores if the machine is ready to be occupied with another user.
+    public int timeUntilComplete = 0; // in frames
     private boolean done = false; //stores if the machine is ready to be unloaded.
     private boolean upgraded = false;
     public boolean broken = false;
@@ -55,6 +55,7 @@ public class Machine extends Tile
         timeUntilComplete--;
         if (timeUntilComplete<=0) {
             done = true;
+            this.available = true;
             uses++;
             if(uses > 10) {
                 if (!broken)
