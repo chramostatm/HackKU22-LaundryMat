@@ -24,6 +24,7 @@ public class Graphics
     GameEngine engine;
     Image washer = new Image(new File("src/images/washing-machine.jpg").toURI().toString());
     Image wall = new Image(new File("src/images/wall.jpg").toURI().toString());
+    Image customer = new Image(new File("src/images/customer.jpg").toURI().toString());
 
     public Graphics(Stage inPrimaryStage)
     {
