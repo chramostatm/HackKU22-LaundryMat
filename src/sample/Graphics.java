@@ -94,8 +94,8 @@ public class Graphics
         // Add the File menu to the menu bar.
         menuBar.getMenus().addAll(fileMenu, balanceMenu, debtMenu);
 
-        Button upgrade = new Button();
-        upgrade.setText("Upgrade");
+//        Button upgrade = new Button();
+//        upgrade.setText("Upgrade");
 
         Button repair = new Button();
         repair.setText("Repair");
@@ -106,7 +106,21 @@ public class Graphics
         HBox buttonBox = new HBox();
         buttonBox.setVisible(false);
         buttonBox.setAlignment(Pos.CENTER);
-        buttonBox.getChildren().addAll(upgrade, repair, close);
+//        buttonBox.getChildren().addAll(upgrade, repair, close);
+        buttonBox.getChildren().addAll(repair, close);
+        HBox bigButtonBox = new HBox();
+        bigButtonBox.setAlignment(Pos.CENTER);
+        Button pay50 = new Button();
+        pay50.setText("Pay $50 off loan");
+        pay50.setOnAction(event ->
+        {
+            if (engine.balanceSheet.currentCapital >= 50)
+            {
+                engine.balanceSheet.currentCapital -=50;
+                engine.balanceSheet.debt -=50;
+            }
+        });
+        bigButtonBox.getChildren().addAll(buttonBox, pay50);
 
         repair.setOnAction(event ->
         {
@@ -117,10 +131,10 @@ public class Graphics
         {
             buttonBox.setVisible(false);
         });
-        upgrade.setOnAction(event ->
-        {
-            buttonBox.setVisible(false);
-        });
+//        upgrade.setOnAction(event ->
+//        {
+//            buttonBox.setVisible(false);
+//        });
 
         gamePane.setOnMouseMoved(event ->
         {
@@ -158,7 +172,7 @@ public class Graphics
 
         VBox mainBox = new VBox();
         mainBox.setAlignment(Pos.CENTER);
-        mainBox.getChildren().addAll(menuBar, buttonBox, gamePane);
+        mainBox.getChildren().addAll(menuBar, bigButtonBox, gamePane);
         root.getChildren().addAll(mainBox);
 
         // Create a Scene and display it.
