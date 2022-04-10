@@ -11,10 +11,11 @@ public class Customer
     private final float weight;     // the weight of the laundry being cleaned
     private double locX;            // the X-coordinate location of the customer
     private double locY;            // the Y-coordinate location of the customer
-    private double machineX;        // the X-coordinate of the customer's machine they are using.
-    private double machineY;        // the Y-coordinate of the customer's machine they are using.
+    private int machineX;        // the X-coordinate of the customer's machine they are using.
+    private int machineY;        // the Y-coordinate of the customer's machine they are using.
     private boolean hasMachine = false;
     private int cooldown = 15;
+    private int satisfaction = 50; // from 0 to 100, changes overall satisfaction about the company.
 
     /**
      * Constructor
@@ -114,6 +115,53 @@ public class Customer
         cooldown--;
         if (cooldown<=0) {
             //find machine they can use.
+            ArrayList<Integer> moves = possibleMoves();
+
+            if (!hasMachine) {
+
+                //if there is an isle below the AI, look at all washers down those rows.
+                if (moves.contains(3)) {
+                    //if there are machines above it and to the left, check those machines
+                    int offsetY = 0;
+                    while(GameController.gameEngine.tiles.get((int) (locY+1)).get((int)(locX-1)) instanceof Machine) {
+                        Machine t = (Machine)GameController.gameEngine.tiles.get((int) (locY+1+offsetY)).get((int)(locX-1));
+                        if (t.getAvailable()) {
+                            machineX = (int)locX-1;
+                            machineY = (int)locY+1+offsetY;
+                            hasMachine = true;
+                            satisfaction+=10+10*Math.random();
+                            return;
+                        }
+                        offsetY++;
+                    }
+                    //if there are machines above it and to the right, check those machines
+                    offsetY = 0;
+                    while(GameController.gameEngine.tiles.get((int) (locY+1)).get((int)(locX+1)) instanceof Machine) {
+                        Machine t = (Machine)GameController.gameEngine.tiles.get((int) (locY+1+offsetY)).get((int)(locX-1));
+                        if (t.getAvailable()) {
+                            machineX = (int)locX-1;
+                            machineY = (int)locY+1+offsetY;
+                            hasMachine = true;
+                            satisfaction+=10+10*Math.random();
+                            return;
+                        }
+                        offsetY++;
+                    }
+                } else {
+                    //move right if possible, else stop and get unsatisfied.
+                    if (moves.contains(2)) {
+                        move("right");
+                    } else {
+                        satisfaction-=30+Math.random()*15;
+                    }
+                }
+            } else {
+                Machine t = (Machine)GameController.gameEngine.tiles.get(machineY).get(machineX);
+                int diffX = (int) (locX-t.x), diffY = (int) (locY-t.y);
+                if (Math.abs(diffX)+Math.abs(diffY)<=1) {
+
+                }
+            }
 
 
 
