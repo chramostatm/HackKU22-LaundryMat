@@ -111,8 +111,6 @@ public class Graphics
         repair.setOnAction(event ->
         {
             engine.repair();
-            engine.tiles.stream().forEach(outerList -> outerList.stream().filter(tile -> !(tile instanceof Machine)).
-                    collect(Collectors.toList()).stream().filter(e -> !((Machine)e).isSpecialTile()));
             buttonBox.setVisible(false);
         });
         close.setOnAction(event ->
@@ -130,21 +128,32 @@ public class Graphics
             {
                 try
                 {
-                    engine.tiles.stream().forEach(e -> e.stream().filter(tile -> tile instanceof Machine).
-                            collect(Collectors.toList()).stream().forEach(machine -> ((Machine)machine).setSpecialTile(false)));
+                    engine.tiles.forEach(e -> e.stream().filter(tile -> tile instanceof Machine).
+                            collect(Collectors.toList()).forEach(machine -> ((Machine)machine).setSpecialTile(false)));
                     ((Machine)engine.tiles.get((int) Math.floor(event.getY()/75))
                             .get((int) Math.floor(event.getX()/75))).setSpecialTile(true);
 
                     ((Machine)engine.tiles.get((int) Math.floor(event.getY()/75))
                             .get((int) Math.floor(event.getX()/75))).setSpecialTile(true);
-                }catch (Exception e)
+                }catch (Exception ignored)
                 {}
             }
         });
 
         gamePane.setOnMouseClicked(event ->
         {
-            buttonBox.setVisible(true);
+            try
+            {
+                engine.tiles.forEach(e -> e.stream().filter(tile -> tile instanceof Machine).
+                        collect(Collectors.toList()).forEach(machine -> ((Machine)machine).setSpecialTile(false)));
+                ((Machine)engine.tiles.get((int) Math.floor(event.getY()/75))
+                        .get((int) Math.floor(event.getX()/75))).setSpecialTile(true);
+
+                ((Machine)engine.tiles.get((int) Math.floor(event.getY()/75))
+                        .get((int) Math.floor(event.getX()/75))).setSpecialTile(true);
+                buttonBox.setVisible(true);
+            }catch (Exception ignored)
+            {}
         });
 
         VBox mainBox = new VBox();
