@@ -91,7 +91,6 @@ public class GameEngine
 
     public void incSpeed() {
         speedModifier+=0.1F;
-        System.out.println(speedModifier);
     }
 
     private class GameTimer extends AnimationTimer {
