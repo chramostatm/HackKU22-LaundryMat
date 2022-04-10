@@ -26,7 +26,6 @@ public class Main extends Application {
         MenuController.initialize(graphics, mainMenu);
     }
 
-
     public static void main(String[] args) {
         launch(args);
     }
