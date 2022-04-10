@@ -1,5 +1,6 @@
 package sample; // for the love of pete, who thought this was a good package name!
 
+import java.util.ArrayList;
 import java.util.Random;        // Needed for the Random name generator.
 /**
  * This Customer class
@@ -102,7 +103,7 @@ public class Customer
 
     }
     /**
-     * The think method returns ?
+     * The think method controls how the Customer moves and where they move.
      */
     public void think()
     {
@@ -117,5 +118,17 @@ public class Customer
     {
         return "Customer name: " + name + "\nLaundry weight: " + weight + "\nX-coord: " + locX +
                 "\nY-coord: " + locY;
+    }
+
+    public ArrayList<Integer> possibleMoves() {
+        ArrayList<Integer> moves = new ArrayList<>();
+        for (int i=0; i<4; i++) {
+
+            if (GameController.gameEngine.tiles.get((int) (locY + Math.abs((i + 1) % 4 - 2) - 1))
+                    .get((int) (locX + Math.abs((i + 2) % 4 - 2) - 1)) instanceof EmptyTile) {
+                moves.add(i+1);
+            }
+        }
+        return moves;
     }
 }
