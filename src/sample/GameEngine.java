@@ -151,7 +151,7 @@ public class GameEngine
                     }
                 }
 
-                //if more than 5 minutes pass, then increment the day counter. If you are not in debt by the end of
+                //if more than 1 minute passes, then increment the day counter. If you are not in debt by the end of
                 //the 30 day period then you win.
 
                 //five minutes, then a fifteen second break.
