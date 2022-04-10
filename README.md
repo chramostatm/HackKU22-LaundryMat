@@ -8,6 +8,6 @@ Through this game you can learn important business lessons like
 
 
 #TODO
--update balance on GUI
--partial pay debt button
--add Options menu
+- update balance on GUI
+- partial pay debt button
+- add Options menu
