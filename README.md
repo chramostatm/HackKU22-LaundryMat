@@ -7,7 +7,7 @@ Through this game you can learn important business lessons like
 -and keeping customers happy
 
 
-#TODO
+# TODO
 - update balance on GUI
 - partial pay debt button
 - add Options menu
