@@ -16,6 +16,9 @@ public class Customer
     private boolean hasMachine = false;
     private int cooldown = 15;
     private int satisfaction = 50; // from 0 to 100, changes overall satisfaction about the company.
+    private boolean leaving = false;
+    private boolean left = false;
+    private boolean waiting = false;
 
     /**
      * Constructor
@@ -48,6 +51,14 @@ public class Customer
     public String getName()
     {
         return name;
+    }
+
+    /**
+     * hasLeft method
+     * @return if the customer has left the laundromat.
+     */
+    public boolean hasLeft() {
+        return left;
     }
 
     /**
@@ -112,6 +123,9 @@ public class Customer
      */
     public void think()
     {
+        if (leaving) {
+            moveToExit();
+        }
         cooldown--;
         if (cooldown<=0) {
             //find machine they can use.
@@ -159,7 +173,12 @@ public class Customer
                 Machine t = (Machine)GameController.gameEngine.tiles.get(machineY).get(machineX);
                 int diffX = (int) (locX-t.x), diffY = (int) (locY-t.y);
                 if (Math.abs(diffX)+Math.abs(diffY)<=1) {
-
+                    if (!waiting) {
+                        return;
+                    } //else
+                    startMachine();
+                } else {
+                    moveToMachine();
                 }
             }
 
@@ -209,4 +228,32 @@ public class Customer
             move("up");
         }
     }
+
+    public void moveToExit() {
+        ArrayList<Integer> moves = possibleMoves();
+        if (moves.contains(1)) {
+            move("up");
+            return;
+        }
+        if (moves.contains(4)) {
+            move("left");
+            return;
+        }
+        if (atDoor()) {
+            move("left");
+            left = true;
+
+        }
+    }
+
+    public void startMachine() {
+        int diffX = (int) (locX-machineX), diffY = (int) (locY-machineY);
+        Machine t = (Machine) GameController.gameEngine.tiles.get((int) (locY-diffY)).get((int) (locX-diffX));
+        t.setTimeUntilComplete((t.isUpgraded()) ? 20 : 30);
+    }
+
+    public boolean atDoor() {
+        return (GameController.gameEngine.tiles.get((int) locY).get((int)locX) instanceof DoorTile);
+    }
+
 }

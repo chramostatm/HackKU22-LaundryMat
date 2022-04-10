@@ -148,6 +148,10 @@ public class GameEngine
 //                        exit();
 //                    }
                 }
+
+                //Remove customers who have left.
+                customers.removeIf(Customer::hasLeft);
+
             }
         }
     }
