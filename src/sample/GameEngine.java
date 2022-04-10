@@ -5,6 +5,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 
+import javax.crypto.Mac;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -78,11 +79,18 @@ public class GameEngine
     public void repair() {
         if(repairCost < balanceSheet.currentCapital)
         {
-            tiles.stream().forEach(e -> e.
-                    stream().filter(object -> object instanceof Machine).collect(Collectors.toList()).
-                    stream().filter(machine -> ((Machine)machine).isSpecialTile()).collect(Collectors.toList()).
-                    stream().forEach(special -> ((Machine)special).setAvailable(true)));
-            balanceSheet.currentCapital -= repairCost;
+            for(int i =0; i<tiles.size(); i++)
+            {
+                for (int j=0; j<tiles.get(i).size();j++)
+                {
+                    Tile curTile = tiles.get(i).get(j);
+                    if (curTile instanceof Machine && ((Machine)curTile).isSpecialTile()  && !((Machine)curTile).getAvailable())
+                    {
+                        balanceSheet.repair();
+                        ((Machine)curTile).setAvailable(true);
+                    }
+                }
+            }
         }
     }
 
@@ -130,7 +138,7 @@ public class GameEngine
                 if (visitCooldown<=0) {
                     customers.add(new Customer(null, 100));
 
-                    visitCooldown = (int)((float)(1-satisfaction/100)*(150+Math.random()*90));
+                    visitCooldown = 60+(int)((float)(1.1F-satisfaction/100)*(120+Math.random()*240));
                 }
 
                 //lowers a machine's cooldown over time.
