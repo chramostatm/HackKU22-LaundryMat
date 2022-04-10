@@ -36,6 +36,7 @@ public class Graphics
     Image brokenWasher = new Image(new File("src/images/brokenMachine.png").toURI().toString());
     Menu balanceMenu;
     Menu debtMenu;
+    Label speed;
 
     //Image wall = new Image(new File("src/images/wall.jpg").toURI().toString());
     Image customer = new Image(new File("src/images/customer.jpg").toURI().toString());
@@ -125,10 +126,12 @@ public class Graphics
         advertise.setText("Advertise!");
         advertise.setOnAction(event ->
         {
-            GameController.gameEngine.speedModifier+=0.1F;
-
+            GameController.gameEngine.incSpeed();
         });
-        bigButtonBox.getChildren().addAll(buttonBox, pay50, advertise);
+
+        speed = new Label();
+        speed.setText("Speed modifier: "+GameController.gameEngine.speedModifier);
+        bigButtonBox.getChildren().addAll(buttonBox, pay50, advertise, speed);
 
         repair.setOnAction(event ->
         {
@@ -260,5 +263,9 @@ public class Graphics
     {
         primaryStage.setScene(inScene);
         primaryStage.show();
+    }
+
+    public void setText(float modifier) {
+        speed.setText("Speed Modifier: "+modifier);
     }
 }

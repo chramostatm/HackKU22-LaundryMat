@@ -15,7 +15,7 @@ public class GameEngine
     public BalanceSheet balanceSheet = new BalanceSheet();
     private GameTimer timer;
     private int satisfaction = 50;
-    public int speedModifier = 1;
+    public float speedModifier = 1;
 
     public GameEngine(){
         start();
@@ -89,6 +89,11 @@ public class GameEngine
         }
     }
 
+    public void incSpeed() {
+        speedModifier+=0.1F;
+        System.out.println(speedModifier);
+    }
+
     private class GameTimer extends AnimationTimer {
 
         //Keeps track of time
@@ -118,7 +123,7 @@ public class GameEngine
             //100 milliseconds (.1 seconds)
             //runs every frame.
             if (difference>=rate) {
-                speedModifier = (int)Math.max(1, speedModifier-(0.1F/30F)*speedModifier);
+                speedModifier = Math.max(1, speedModifier-(0.01F/30F)*speedModifier);
                 GameController.graphics.draw();
                 frameCounter = (frameCounter + 1) % FRAME_RATE;
 
@@ -134,7 +139,8 @@ public class GameEngine
                 if (visitCooldown<=0) {
                     customers.add(new Customer(null, 100));
 
-                    visitCooldown = 60+(int)((1.1F-satisfaction/100)*(30+Math.random()*120))/speedModifier;
+                    visitCooldown = (int) (60+((1.1F-satisfaction/100)*(30+Math.random()*120))/speedModifier);
+                    GameController.graphics.setText(speedModifier);
                 }
 
                 //lowers a machine's cooldown over time.
